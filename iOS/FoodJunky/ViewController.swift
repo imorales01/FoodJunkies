@@ -15,7 +15,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var db: OpaquePointer?
     @IBOutlet  var tableView: UITableView!
    
-   
+    @IBOutlet weak var Save: UIButton!
+    
     func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
@@ -58,12 +59,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
-    /*
-    @IBAction func save(_ sender: UIButton) {
-        for allergies in myarray{
-            print("Hello, \(allergies)!")
-        }
-    }*/
+    @IBAction func save(_ sender: UIButton)
+    {
+    for allergies in myarray{
+        print("Hello, \(allergies)!")}
+        
+    }
+    
+    
     
     
     

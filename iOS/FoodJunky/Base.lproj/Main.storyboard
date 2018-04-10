@@ -40,8 +40,7 @@
                                     <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="SAVE:" destination="DE9-Eh-2WW" eventType="touchUpInside" id="tjX-JF-2mC"/>
-                                    <action selector="save:" destination="DE9-Eh-2WW" eventType="touchUpInside" id="cs3-uY-mms"/>
+                                    <action selector="save:" destination="DE9-Eh-2WW" eventType="touchUpInside" id="Vc2-92-sEW"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DZI-oJ-hM9">
@@ -77,8 +76,7 @@
                         <viewLayoutGuide key="safeArea" id="Rr7-en-RbU"/>
                     </view>
                     <connections>
-                        <outlet property="Save" destination="wR3-Qp-P9E" id="LYN-Ke-W0n"/>
-                        <outlet property="save" destination="wR3-Qp-P9E" id="Sme-nC-GgQ"/>
+                        <outlet property="Save" destination="wR3-Qp-P9E" id="1he-dR-sf3"/>
                         <outlet property="tableView" destination="DZI-oJ-hM9" id="quN-eH-rX2"/>
                     </connections>
                 </viewController>
