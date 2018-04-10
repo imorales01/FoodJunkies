@@ -12,7 +12,7 @@
 		06651166205B3BFC00086321 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06651165205B3BFC00086321 /* Foundation.framework */; };
 		06651168205B3C1400086321 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 06651167205B3C1400086321 /* libsqlite3.tbd */; };
 		067AC6002057796C000C79E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AC5FF2057796C000C79E9 /* AppDelegate.swift */; };
-		067AC6022057796C000C79E9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AC6012057796C000C79E9 /* ViewController.swift */; };
+		067AC6022057796C000C79E9 /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067AC6012057796C000C79E9 /* Allergy.swift */; };
 		067AC6052057796C000C79E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 067AC6032057796C000C79E9 /* Main.storyboard */; };
 		067AC6082057796C000C79E9 /* FoodJunky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 067AC6062057796C000C79E9 /* FoodJunky.xcdatamodeld */; };
 		067AC60A2057796C000C79E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 067AC6092057796C000C79E9 /* Assets.xcassets */; };
@@ -68,7 +68,7 @@
 		06651167205B3C1400086321 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		067AC5FC2057796C000C79E9 /* FoodJunky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodJunky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		067AC5FF2057796C000C79E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		067AC6012057796C000C79E9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		067AC6012057796C000C79E9 /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
 		067AC6042057796C000C79E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		067AC6072057796C000C79E9 /* FoodJunky.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodJunky.xcdatamodel; sourceTree = "<group>"; };
 		067AC6092057796C000C79E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				067AC5FF2057796C000C79E9 /* AppDelegate.swift */,
-				067AC6012057796C000C79E9 /* ViewController.swift */,
+				067AC6012057796C000C79E9 /* Allergy.swift */,
 				067AC6032057796C000C79E9 /* Main.storyboard */,
 				067AC6092057796C000C79E9 /* Assets.xcassets */,
 				067AC60B2057796C000C79E9 /* LaunchScreen.storyboard */,
@@ -311,7 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				067AC6022057796C000C79E9 /* ViewController.swift in Sources */,
+				067AC6022057796C000C79E9 /* Allergy.swift in Sources */,
 				067AC6002057796C000C79E9 /* AppDelegate.swift in Sources */,
 				067AC6082057796C000C79E9 /* FoodJunky.xcdatamodeld in Sources */,
 			);
