@@ -9,7 +9,7 @@
 import UIKit
 import SQLite3
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class Allergy: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     //table for the allergies list
     var db: OpaquePointer?
