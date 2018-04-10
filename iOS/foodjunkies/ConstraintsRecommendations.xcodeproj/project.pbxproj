@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8A1A1BCE207C290800BEC9F5 /* recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A1BCD207C290800BEC9F5 /* recommend.swift */; };
-		8A1A1BD0207D321600BEC9F5 /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A1BCF207D321600BEC9F5 /* Allergy.swift */; };
 		8A1EF8A3207B05A50066D27B /* preferenceQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EF8A2207B05A50066D27B /* preferenceQuiz.swift */; };
 		8A1EF8A5207B07380066D27B /* homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EF8A4207B07380066D27B /* homepage.swift */; };
 		8A1EF8A9207B1D2F0066D27B /* myCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EF8A8207B1D2F0066D27B /* myCell.swift */; };
@@ -18,6 +17,7 @@
 		8A8AE0E9207A895500A49774 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A8AE0E8207A895500A49774 /* Assets.xcassets */; };
 		8A8AE0EC207A895500A49774 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A8AE0EA207A895500A49774 /* LaunchScreen.storyboard */; };
 		8A8AE0F7207A895500A49774 /* ConstraintsRecommendationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8AE0F6207A895500A49774 /* ConstraintsRecommendationsTests.swift */; };
+		8A9CE3BF207D6FB0003C147D /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9CE3BE207D6FB0003C147D /* Allergy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,7 +32,6 @@
 
 /* Begin PBXFileReference section */
 		8A1A1BCD207C290800BEC9F5 /* recommend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recommend.swift; sourceTree = "<group>"; };
-		8A1A1BCF207D321600BEC9F5 /* Allergy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Allergy.swift; path = ../../Gurjot/FoodJunky/Allergy.swift; sourceTree = "<group>"; };
 		8A1EF8A2207B05A50066D27B /* preferenceQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = preferenceQuiz.swift; sourceTree = "<group>"; };
 		8A1EF8A4207B07380066D27B /* homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homepage.swift; sourceTree = "<group>"; };
 		8A1EF8A8207B1D2F0066D27B /* myCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myCell.swift; sourceTree = "<group>"; };
@@ -46,6 +45,7 @@
 		8A8AE0F2207A895500A49774 /* ConstraintsRecommendationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConstraintsRecommendationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A8AE0F6207A895500A49774 /* ConstraintsRecommendationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsRecommendationsTests.swift; sourceTree = "<group>"; };
 		8A8AE0F8207A895500A49774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8A9CE3BE207D6FB0003C147D /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,7 @@
 				8A1EF8A2207B05A50066D27B /* preferenceQuiz.swift */,
 				8A1EF8A8207B1D2F0066D27B /* myCell.swift */,
 				8A1A1BCD207C290800BEC9F5 /* recommend.swift */,
-				8A1A1BCF207D321600BEC9F5 /* Allergy.swift */,
+				8A9CE3BE207D6FB0003C147D /* Allergy.swift */,
 				8A8AE0E5207A895500A49774 /* Main.storyboard */,
 				8A8AE0E8207A895500A49774 /* Assets.xcassets */,
 				8A8AE0EA207A895500A49774 /* LaunchScreen.storyboard */,
@@ -214,11 +214,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A9CE3BF207D6FB0003C147D /* Allergy.swift in Sources */,
 				8A1A1BCE207C290800BEC9F5 /* recommend.swift in Sources */,
 				8A1EF8A3207B05A50066D27B /* preferenceQuiz.swift in Sources */,
 				8A8AE0E4207A895500A49774 /* ViewController.swift in Sources */,
 				8A1EF8A9207B1D2F0066D27B /* myCell.swift in Sources */,
-				8A1A1BD0207D321600BEC9F5 /* Allergy.swift in Sources */,
 				8A8AE0E2207A895500A49774 /* AppDelegate.swift in Sources */,
 				8A1EF8A5207B07380066D27B /* homepage.swift in Sources */,
 			);

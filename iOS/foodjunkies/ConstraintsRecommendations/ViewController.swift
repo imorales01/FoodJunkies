@@ -71,10 +71,10 @@ class ViewController: UIViewController {
         }
         
         // execute the query to insert the values
-//        if sqlite3_step(stmt) == SQLITE_DONE {
-//            print ("FoodJunkies saved Successfully")
-//            query()
-//        }
+        if sqlite3_step(stmt) == SQLITE_DONE {
+            print ("FoodJunkies saved Successfully")
+            query()
+        }
         
         
     }
