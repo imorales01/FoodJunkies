@@ -2,10 +2,10 @@
 //  ViewController.swift
 //  FoodJunky
 //
-//  Created by g on 3/12/18.
+//  Created by Gurjot on 3/12/18.
 //  Copyright © 2018 Gurjot. All rights reserved.
 //
-
+//
 import UIKit
 import SQLite3
 
@@ -62,7 +62,7 @@ class Allergy: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBAction func save(_ sender: UIButton)
     {
         for allergies in myarray{
-            print("Hello, \(allergies)!")}
+            print("Hello, \(allergies)!")}//test Save function 
         
     }
     
