@@ -240,6 +240,9 @@
                                 <state key="normal" title="Discover">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="Bcm-XX-gor" kind="presentation" id="vlb-aq-XQ2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHy-IJ-qke">
                                 <rect key="frame" x="16" y="271" width="343" height="35"/>
@@ -704,26 +707,36 @@
             </objects>
             <point key="canvasLocation" x="-935.20000000000005" y="839.73013493253382"/>
         </scene>
-        <!--Yelptest-->
+        <!--Output Yelp Tester-->
         <scene sceneID="8h5-Co-8Q6">
             <objects>
-                <viewController id="Bcm-XX-gor" customClass="Yelptest" customModule="ConstraintsRecommendations" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Bcm-XX-gor" customClass="OutputYelpTester" customModule="ConstraintsRecommendations" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dVJ-a8-PSX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qa4-QJ-OTF">
+                                <rect key="frame" x="108" y="252" width="102" height="74"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="fns-l5-ET2" kind="presentation" id="2Ac-3s-SQ9"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="0wu-dB-Qlf"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTn-O7-PcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391" y="2138"/>
+            <point key="canvasLocation" x="1440.5" y="754.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="user1" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nKc-be-Tg7"/>
+        <segue reference="2Ac-3s-SQ9"/>
     </inferredMetricsTieBreakers>
 </document>
