@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Text;
 
 import java.io.InputStream;
@@ -27,6 +29,7 @@ public class DisplayRestaurant extends AppCompatActivity {
     private String phoneNumber;
     private String price;
     private String imageURL;
+    private String food;
     private double distance;
     private double rating;
     private ImageView restaurantImage;
@@ -58,6 +61,7 @@ public class DisplayRestaurant extends AppCompatActivity {
         //distance = Double.valueOf(intent.getStringExtra("distance")); //Convert the string values to doubles
         //rating = Double.valueOf(intent.getStringExtra("rating"));
         imageURL = intent.getStringExtra("imageURL");
+        food = intent.getStringExtra("food");
 
         setTitle("Additional details..."); //Set title to the restaurant name
 
@@ -80,52 +84,15 @@ public class DisplayRestaurant extends AppCompatActivity {
         buttonSave.setOnClickListener();
         */
 
-        new DownloadImageTask(restaurantImage).execute(imageURL); //Asynchronously download the image from the URL and set
-
-    }
-
-    //@@@@@@@@@ UNUSED FUNCTION SRC: https://stackoverflow.com/questions/6407324/how-to-display-image-from-url-on-android
-    // Converts the image from a URL into a drawable
-    public static Drawable loadURLImage(String url) {
-        try {
-            InputStream inputStream = (InputStream) new URL(url).getContent();
-            Drawable drawable = Drawable.createFromStream(inputStream, "src name");
-            return drawable;
-        } catch (Exception e) {
-            return null;
-        }
+        Glide.with(this).load(imageURL).into(restaurantImage);
     }
 
     //Go back to the previous activity on back arrow press
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(DisplayRestaurant.this, SelectRestaurant.class);
+        myIntent.putExtra("RECOMMEND", food);
         startActivityForResult(myIntent, 0);
         return true;
     }
 
-    //Class to Asynchronously download an image from the YELP URL and set the imageView
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bitmapImage;
-
-        public DownloadImageTask(ImageView bitmapImage) {
-            this.bitmapImage = bitmapImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urlDisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                //Create an input stream with the given URL, and then convert it into a Bitmap
-                InputStream in = new java.net.URL(urlDisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bitmapImage.setImageBitmap(result); //Set the ImageView as the image from the URL
-        }
-    }
 }

@@ -3,8 +3,10 @@ package fj.foodjunkies;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -57,6 +59,8 @@ public class Recommend extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
+        ActionBar actionBar = getSupportActionBar(); //Set back button on the title bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getName = (Button) findViewById(R.id.GetName);
         showRec = (Button) findViewById(R.id.ShowRecommendation);
@@ -316,8 +320,12 @@ public class Recommend extends AppCompatActivity {
             }
         };
         requestQueue.add(request);
-
-
+    }
+    //Go back to the previous activity on back arrow press
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(Recommend.this, Welcome.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 
 
