@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 public class Constraints extends AppCompatActivity {
 <<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
 =======
+=======
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
     //Declaring Seekbars and textviews
     private static SeekBar budget_bar;
     private static TextView budget_text;
@@ -26,6 +29,7 @@ public class Constraints extends AppCompatActivity {
     private static TextView time_text;
 
 <<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
     private int budget;
     private int distance;
     private int time;
@@ -33,6 +37,11 @@ public class Constraints extends AppCompatActivity {
     private int ID;
 
     private static fj.foodjunkies.DataBaseHelper db;
+=======
+    private static
+    //Declare DataBase Helper class
+    fj.foodjunkies.DataBaseHelper db;
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
 =======
     private static
     //Declare DataBase Helper class
