@@ -10,6 +10,12 @@ import android.widget.Toast;
 import android.widget.TextView;
 
 public class Constraints extends AppCompatActivity {
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
+=======
+    //Declaring Seekbars and textviews
+    private static SeekBar budget_bar;
+    private static TextView budget_text;
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
 
     private static SeekBar budget_bar;
     private static SeekBar time_bar;
@@ -19,6 +25,7 @@ public class Constraints extends AppCompatActivity {
     private static TextView distance_text;
     private static TextView time_text;
 
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
     private int budget;
     private int distance;
     private int time;
@@ -26,12 +33,17 @@ public class Constraints extends AppCompatActivity {
     private int ID;
 
     private static fj.foodjunkies.DataBaseHelper db;
+=======
+    private static
+    //Declare DataBase Helper class
+    fj.foodjunkies.DataBaseHelper db;
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_constraints);
-        db = new fj.foodjunkies.DataBaseHelper(this); //Create a DataBaseHelper to query the database
+        db = new fj.foodjunkies.DataBaseHelper(this); //Create a database with DataBaseHelper
 
         //Get the ID of the current user
         ID=1; //Temporary ID for testing, feed in current ID from another activity
