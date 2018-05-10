@@ -10,19 +10,43 @@ import android.widget.Toast;
 import android.widget.TextView;
 
 public class Constraints extends AppCompatActivity {
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
+=======
+=======
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
     //Declaring Seekbars and textviews
     private static SeekBar budget_bar;
     private static TextView budget_text;
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
 
-    private static SeekBar distance_bar;
-    private static TextView distance_text;
-
+    private static SeekBar budget_bar;
     private static SeekBar time_bar;
+    private static SeekBar distance_bar;
+
+    private static TextView budget_text;
+    private static TextView distance_text;
     private static TextView time_text;
 
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
+<<<<<<< HEAD:Android/foodjunkies/app/src/main/java/fj/foodjunkies/Constraints.java
+    private int budget;
+    private int distance;
+    private int time;
+
+    private int ID;
+
+    private static fj.foodjunkies.DataBaseHelper db;
+=======
     private static
     //Declare DataBase Helper class
     fj.foodjunkies.DataBaseHelper db;
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
+=======
+    private static
+    //Declare DataBase Helper class
+    fj.foodjunkies.DataBaseHelper db;
+>>>>>>> master:Android/foodjunkies/app/src/main/java/Constraints.java
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +54,17 @@ public class Constraints extends AppCompatActivity {
         setContentView(R.layout.activity_constraints);
         db = new fj.foodjunkies.DataBaseHelper(this); //Create a database with DataBaseHelper
 
-        int ID=1; //Temporary ID for testing, feed in current ID from another activity
+        //Get the ID of the current user
+        ID=1; //Temporary ID for testing, feed in current ID from another activity
 
         seekBar(ID); //Create the seek bars
     }
 
+    //Upon pressing the done button, save the user's Constraints into the SQLite database, and launch the next activity
     public void doneButtonClicked(View view) {
+        db.updateBudget(ID, budget); //Update the budget constraint for the user in a database
+        db.updateDistance(ID,distance); //Update the distance constraints for the user in a database
+        db.updateTime(ID,time); //Update the time constraints for the user in a database
         startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Welcome.class));
     }
 
@@ -91,11 +120,10 @@ public class Constraints extends AppCompatActivity {
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
                         budget_text.setText("$" + progress_value );
-                        db.updateBudget(ID,progress_value); //Update the budget constraint for the user in a database
+                        budget = progress_value;
                     }
                 }
         );
-
         //Seek bar for distance
         distance_bar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -111,7 +139,7 @@ public class Constraints extends AppCompatActivity {
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
                         distance_text.setText( progress_value + " miles");
-                        db.updateDistance(ID,progress_value); //Update the distance constraints for the user in a database
+                        distance = progress_value;
                     }
                 }
         );
@@ -131,7 +159,7 @@ public class Constraints extends AppCompatActivity {
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
                         time_text.setText(progress_value + " min");
-                        db.updateTime(ID,progress_value); //Update the time constraints for the user in a database
+                        time = progress_value;
                     }
                 }
         );

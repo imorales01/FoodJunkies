@@ -1,9 +1,12 @@
 package fj.foodjunkies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,14 +27,12 @@ import java.util.Random;
 
 public class Recommend extends AppCompatActivity {
 
-
     Button getCuisine, recommendDish, getName, showRec;
     RequestQueue requestQueue;
     //URLS to php scripts
     String getRatings = "http://54.208.66.68:80/getRatings.php";
     String getDishes = "http://54.208.66.68:80/getDishes.php";
     String getDishName = "http://54.208.66.68:80/getDishName.php";
-
 
     TextView showDish;
     TextView showName;
@@ -58,6 +59,8 @@ public class Recommend extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
+        ActionBar actionBar = getSupportActionBar(); //Set back button on the title bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         getName = (Button) findViewById(R.id.GetName);
         showRec = (Button) findViewById(R.id.ShowRecommendation);
@@ -130,11 +133,13 @@ public class Recommend extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String temp = recName;
-                System.out.println("Check recName: " +temp);
+                System.out.println("Check recName: " + recName);
 
-                showName.setText(temp);
+                showName.setText(recName);
 
+                Intent intent = new Intent(getApplicationContext(), SelectRestaurant.class);
+                intent.putExtra("RECOMMEND", recName);
+                startActivity(intent);
             }
         });
 
@@ -315,8 +320,12 @@ public class Recommend extends AppCompatActivity {
             }
         };
         requestQueue.add(request);
-
-
+    }
+    //Go back to the previous activity on back arrow press
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(Recommend.this, Welcome.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 
 
