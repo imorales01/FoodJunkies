@@ -39,13 +39,14 @@ import retrofit2.Response;
 public class SelectRestaurant extends AppCompatActivity implements android.location.LocationListener {
 
     //Parameters and constraints for the Yelp API
-    private String apiKey = "oNavXIvI6AgPNIM-fsgq2EBTWIJJKySS0yE-t-ANnOMTaJKiJJI1gT_DssXmcRCgVOgYQZQ8Jx2vPlnQ-jbjSrdaccAUT1-Qkap-wkBwQZ9MSVy_E39a1ekSI_rpWnYx";
+    private String apiKey = "gfmvYvnlKgqA734M9aJBYs5BZ80ILsMjsP-r9LzU5NAemICZ1gmB7wj-sz_LrkcZmf9YLzf4x-1irQkHK_dTtwyE2hK4AdNFcpkqDNg8-uSCUQRAQF-ry1wuOZD0WnYx";
     private String longitude = "40.7685"; //Coordinates for location, Hunter College
     private String latitude = "-73.9646";
     private String radius = "1610"; //1 mile, 1610 meters
-    private String term = "dumplings"; //Search for term of food or restraunts
+    private String term; //Search for term of food or restraunts
     private String limit = "3"; //Limit search to 3
     private String open_now = "true"; //Show only open stores
+    private String id;
 
     private fj.foodjunkies.DataBaseHelper db;
     private int userID = 1; //Current user
@@ -77,15 +78,15 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
             }
         }
 
+        //Get an intent extra from the Recommend activity which will contain the food to search for
+        Intent intent = getIntent();
+        term = intent.getStringExtra("RECOMMEND");
+
         restaurantList = (ListView) findViewById(R.id.restaurantList);
         foodText = (TextView) findViewById(R.id.textFood);
         foodText.setText(term);
         foodText.setAllCaps(true);
-/*
-        //Get an intent extra from the Recommend activity which will contain the food to search for
-        Intent intent = getIntent();
-        term = intent.getStringExtra("food");
-*/
+
         //Create a location manager to get the GPS of current location
         double Longitude=0, Latitude=0;
         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER); //Get the last known GPS location
@@ -145,7 +146,8 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                 ArrayList<Business> businesses = searchResponse.getBusinesses(); //API returns an ArrayList of the business objects representing businesses found matching the paramters
                 //If the Yelp API returned restraunts matching the parameters, then parse the business objects for relevant restaurant information and save to an ArrayList
                 if (!businesses.isEmpty()){
-                    for (int i=0; i<Integer.valueOf(limit); i++){
+                    for (int i=0; i<businesses.size(); i++){
+                        String businessID = businesses.get(i).getId();
                         String businessName = businesses.get(i).getName();  //Get the business name
                         Double rating = businesses.get(i).getRating();  //Get the rating
                         com.yelp.fusion.client.models.Location businessLocation = businesses.get(i).getLocation(); //Get the address
@@ -156,15 +158,15 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                         double milesAway = metersToMiles(businesses.get(i).getDistance()); //Get the distance of the restaurant in meters and convert into miles
 
                         //Create a new Restaurant object to store information on the restaurant
-                        Restaurant restaurant = new Restaurant(businessName, address, phone, price, rating, milesAway, imageURL);
+                        Restaurant restaurant = new Restaurant(businessID, businessName, address, phone, price, rating, milesAway, imageURL);
                         restaurants.add(restaurant); //Add to the restaurant ArrayList
-     Log.d("@@@", "# of Restraunts found: "+ totalNumberOfResult + " / Name: " + businessName + " / Rating: " + rating + " / Address: " + address + " / Miles Away: " + milesAway);
+     Log.d("@@@", "# of Restraunts found: "+ totalNumberOfResult + " / Business id: " + businessID + " / Name: " + businessName + " / Rating: " + rating + " / Address: " + address + " / Miles Away: " + milesAway);
  //                       Toast.makeText(getApplicationContext(), "# of Restraunts found: "+ totalNumberOfResult + " / Name: " + businessName + " / Rating: " + rating + " / Address: " + address + " / Miles Away: " + milesAway, Toast.LENGTH_LONG).show();
                     }
 
 //@@@@@@@@@ Creating a basic ListView atm with just the name of the restaurant
                     //Create an ArrayList with the String names of the restaurants because we can't create an ArrayAdapter with ArrayList of object Food
-                    ArrayList<String>  restaurantNames = new ArrayList<String>();
+                    final ArrayList<String>  restaurantNames = new ArrayList<String>();
                     for (int i=0; i<restaurants.size(); i++){
                         String displayRestaurant = "\n" + restaurants.get(i).name + " ("
                                 +  restaurants.get(i).price + ") "
@@ -194,6 +196,7 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                             final String selectedRestaurant= restaurants.get(position).name;
                             //Create an intent to pass the restaurants information to the next activity for display
                             Intent passIntent = new Intent(SelectRestaurant.this, DisplayRestaurant.class);
+                            passIntent.putExtra("id", restaurants.get(position).id);
                             passIntent.putExtra("name", restaurants.get(position).name);
                             passIntent.putExtra("address", restaurants.get(position).address);
                             passIntent.putExtra("phone", restaurants.get(position).phone);
@@ -207,7 +210,7 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                 }
                 else { //There were no restaurants that matched the parameters
                     Toast.makeText(getApplicationContext(), "There were no restraunts nearby serving this dish." , Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SelectRestaurant.this, DisplayRestaurant.class); //Go back to the previous recommendation page if no restraunts are found within the constraints
+                    Intent intent = new Intent(SelectRestaurant.this, Recommend.class); //Go back to the previous recommendation page if no restraunts are found within the constraints
                     startActivity(intent);
                 }
             }
@@ -259,8 +262,10 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
             name="";
         }
 
-        Restaurant (String name, String address, String phone, String price, double rating, double distance, String imageURL)
+        Restaurant (String id, String name, String address, String phone, String price,
+                    double rating, double distance, String imageURL)
         {
+            this.id = id;
             this.name = name;
             this.address = address;
             this.phone = phone;
@@ -270,6 +275,7 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
             this.imageURL = imageURL;
         }
 
+        public String id;
         public String name;
         public String address;
         public String phone;
