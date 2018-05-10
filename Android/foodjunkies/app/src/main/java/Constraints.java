@@ -10,6 +10,7 @@ import android.widget.Toast;
 import android.widget.TextView;
 
 public class Constraints extends AppCompatActivity {
+    //Declaring Seekbars and textviews
     private static SeekBar budget_bar;
     private static TextView budget_text;
 
@@ -19,13 +20,15 @@ public class Constraints extends AppCompatActivity {
     private static SeekBar time_bar;
     private static TextView time_text;
 
-    private static fj.foodjunkies.DataBaseHelper db;
+    private static
+    //Declare DataBase Helper class
+    fj.foodjunkies.DataBaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_constraints);
-        db = new fj.foodjunkies.DataBaseHelper(this); //Create a DataBaseHelper to query the database
+        db = new fj.foodjunkies.DataBaseHelper(this); //Create a database with DataBaseHelper
 
         int ID=1; //Temporary ID for testing, feed in current ID from another activity
 
