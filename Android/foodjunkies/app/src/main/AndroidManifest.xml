@@ -14,14 +14,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< HEAD
-
-        <activity android:name=".LoginActivity"
-=======
         <activity
             android:name=".LoginActivity"
-<<<<<<< HEAD
->>>>>>> master
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,40 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-
-        <activity android:name=".Welcome">
-
-        </activity>
-
-=======
-        <activity android:name=".Welcome" />
->>>>>>> master
-        <activity android:name=".quiz" />
-        <activity android:name=".Recommend" />
-        <activity android:name=".ChooseCuisine" />
-        <activity android:name=".Constraints" />
-<<<<<<< HEAD
-=======
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
->>>>>>> master
-
-        <activity android:name=".SelectRestaurant">
-        </activity>
-<<<<<<< HEAD
-
-        <activity android:name=".DisplayRestaurant"/>
-=======
->>>>>>> master
-=======
         <activity android:name=".Welcome" />
         <activity android:name=".quiz" />
         <activity android:name=".Recommend" />
         <activity android:name=".ChooseCuisine" />
         <activity android:name=".Constraints" />
->>>>>>> master
     </application>
 
 </manifest>

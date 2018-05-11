@@ -6,29 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".ChooseCuisine">
 
-    <LinearLayout
+    <GridView
+        android:id="@+id/displayCuisines"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp">
-
-        </ListView>
-
-    </LinearLayout>
+        android:layout_height="446dp"
+        android:columnWidth="128dp"
+        android:gravity="center"
+        android:numColumns="auto_fit" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="8dp"
         android:onClick="doneButtonClick"
         android:text="DONE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 </android.support.constraint.ConstraintLayout>
