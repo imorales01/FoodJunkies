@@ -39,10 +39,11 @@ import retrofit2.Response;
 public class SelectRestaurant extends AppCompatActivity implements android.location.LocationListener {
 
     //Parameters and constraints for the Yelp API
-    private String apiKey = "gfmvYvnlKgqA734M9aJBYs5BZ80ILsMjsP-r9LzU5NAemICZ1gmB7wj-sz_LrkcZmf9YLzf4x-1irQkHK_dTtwyE2hK4AdNFcpkqDNg8-uSCUQRAQF-ry1wuOZD0WnYx";
+    private String apiKey = "oNavXIvI6AgPNIM-fsgq2EBTWIJJKySS0yE-t-ANnOMTaJKiJJI1gT_DssXmcRCgVOgYQZQ8Jx2vPlnQ-jbjSrdaccAUT1-Qkap-wkBwQZ9MSVy_E39a1ekSI_rpWnYx";
     private String longitude = "40.7685"; //Coordinates for location, Hunter College
     private String latitude = "-73.9646";
-    private String radius = "1610"; //1 mile, 1610 meters
+    private String radius = "3000"; //1 mile, 1610 meters | 5 miles, 8046.72 meters (Change values here for testing distance)
+
     private String term; //Search for term of food or restraunts
     private String limit = "3"; //Limit search to 3
     private String open_now = "true"; //Show only open stores
@@ -102,9 +103,12 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
 
         //Get the user Constraints from the database to obtain parameters for the YELP API
         int budget, distance, time;
-        budget = db.getBudget(userID);
-        distance = db.getDistance(userID);
-        time = db.getTime(userID);
+        if (db.userExists(userID)){
+            budget = db.getBudget(userID);
+            distance = db.getDistance(userID);
+            time = db.getTime(userID);
+        }
+
 
         //Create an API Factory object and authenticate with the API key
         YelpFusionApiFactory apiFactory = new YelpFusionApiFactory();
@@ -114,22 +118,22 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         //Put parameters for the Yelp API GET request
         Map<String, String> params = new HashMap<>();
 
         params.put("term", term); //The food that is searched for, obtained from the Recommendation process
-//       params.put("latitude", longitude);
-//       params.put("longitude", latitude);
+        params.put("latitude", longitude);
+        params.put("longitude", latitude);
         params.put("limit", limit); //Limit is 3 restraunts on display
         params.put("radius", radius);
         params.put("open_now", open_now); //Restaurant is open
 
+        //@@@@ FOR TESTING: if you want to use a hard coded Hunter address then do nothing, other wise comment out the [param longitude & latitude above]and uncomment the one down here
         //Values obtained from user Constraints, and GPS location
 //        params.put("price", String.valueOf(budget)); //Budget constraints
 //        params.put("radius", String.valueOf(distance)); //Radius is the distance from current position
-        params.put("latitude", String.valueOf(Latitude)); //Longitude and Latitude of current GPS location
-        params.put("longitude", String.valueOf(Longitude));
+//        params.put("latitude", String.valueOf(Latitude)); //Longitude and Latitude of current GPS location
+//        params.put("longitude", String.valueOf(Longitude));
 
         restaurants = new ArrayList <Restaurant>(); //Initialize an empty restraunt ArrayList to store restraunts returned from the API result
 
@@ -140,12 +144,13 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
             @Override
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
                 SearchResponse searchResponse = response.body();
-     Log.d("@@@", String.valueOf(response));
+                Log.d("@@@", String.valueOf(response));
 
                 int totalNumberOfResult = searchResponse.getTotal();
                 ArrayList<Business> businesses = searchResponse.getBusinesses(); //API returns an ArrayList of the business objects representing businesses found matching the paramters
                 //If the Yelp API returned restraunts matching the parameters, then parse the business objects for relevant restaurant information and save to an ArrayList
                 if (!businesses.isEmpty()){
+                    Log.d("@@@", "Size: " + String.valueOf(businesses.size()));
                     for (int i=0; i<businesses.size(); i++){
                         String businessID = businesses.get(i).getId();
                         String businessName = businesses.get(i).getName();  //Get the business name
@@ -160,8 +165,7 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                         //Create a new Restaurant object to store information on the restaurant
                         Restaurant restaurant = new Restaurant(businessID, businessName, address, phone, price, rating, milesAway, imageURL);
                         restaurants.add(restaurant); //Add to the restaurant ArrayList
-     Log.d("@@@", "# of Restraunts found: "+ totalNumberOfResult + " / Business id: " + businessID + " / Name: " + businessName + " / Rating: " + rating + " / Address: " + address + " / Miles Away: " + milesAway);
- //                       Toast.makeText(getApplicationContext(), "# of Restraunts found: "+ totalNumberOfResult + " / Name: " + businessName + " / Rating: " + rating + " / Address: " + address + " / Miles Away: " + milesAway, Toast.LENGTH_LONG).show();
+                        Log.d("@@@", "# of Restraunts found: "+ totalNumberOfResult + " / Business id: " + businessID + " / Name: " + businessName + " / Rating: " + rating + " / Address: " + address + " / Miles Away: " + milesAway);
                     }
 
 //@@@@@@@@@ Creating a basic ListView atm with just the name of the restaurant
@@ -173,7 +177,6 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                                 +  "\nAddress: " + restaurants.get(i).address
                                 + "\nRating: " + restaurants.get(i).rating
                                 +"\nDistance: " + metersToMiles(businesses.get(i).getDistance()) + " miles\n";
-                   //     restaurantNames.add(restaurants.get(i).name);
                         restaurantNames.add(displayRestaurant);
                     }
 
@@ -193,7 +196,6 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                     restaurantList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            final String selectedRestaurant= restaurants.get(position).name;
                             //Create an intent to pass the restaurants information to the next activity for display
                             Intent passIntent = new Intent(SelectRestaurant.this, DisplayRestaurant.class);
                             passIntent.putExtra("id", restaurants.get(position).id);
@@ -204,6 +206,7 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                             passIntent.putExtra("distance", String.valueOf(restaurants.get(position).distance));
                             passIntent.putExtra("rating", String.valueOf(restaurants.get(position).rating));
                             passIntent.putExtra("imageURL", String.valueOf(restaurants.get(position).imageURL));
+                            passIntent.putExtra("food", term); //Pass the food name
                             startActivity(passIntent); //Start the next activity
                         }
                     });
@@ -217,6 +220,7 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
             @Override
             public void onFailure(Call<SearchResponse> call, Throwable t) {
                 // HTTP error happened, do something to handle it.
+                Log.d("@@@", "Failed to fetch API");
             }
         };
         call.enqueue(callback);
@@ -224,7 +228,7 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
 
     //Convert from meters to miles
     private double metersToMiles (double meters) {
-        double distanceInMiles=0;
+        double distanceInMiles;
         distanceInMiles = meters * 0.000621371; //Convert meters to miles
         distanceInMiles = Math.round(distanceInMiles * 100); //Round the miles to nearest 2 decimal places
         distanceInMiles = distanceInMiles/100;
@@ -257,11 +261,6 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
 
     //Class to hold information on a restaurant
     public class Restaurant {
-        Restaurant ()
-        {
-            name="";
-        }
-
         Restaurant (String id, String name, String address, String phone, String price,
                     double rating, double distance, String imageURL)
         {
