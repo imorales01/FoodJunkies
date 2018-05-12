@@ -39,7 +39,7 @@ import retrofit2.Response;
 public class SelectRestaurant extends AppCompatActivity implements android.location.LocationListener {
 
     //Parameters and constraints for the Yelp API
-    private String apiKey = "gfmvYvnlKgqA734M9aJBYs5BZ80ILsMjsP-r9LzU5NAemICZ1gmB7wj-sz_LrkcZmf9YLzf4x-1irQkHK_dTtwyE2hK4AdNFcpkqDNg8-uSCUQRAQF-ry1wuOZD0WnYx";
+    private String apiKey = "oNavXIvI6AgPNIM-fsgq2EBTWIJJKySS0yE-t-ANnOMTaJKiJJI1gT_DssXmcRCgVOgYQZQ8Jx2vPlnQ-jbjSrdaccAUT1-Qkap-wkBwQZ9MSVy_E39a1ekSI_rpWnYx";
     private String longitude = "40.7685"; //Coordinates for location, Hunter College
     private String latitude = "-73.9646";
     private String radius = "1610"; //1 mile, 1610 meters

@@ -11,6 +11,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/textViewChooseCuisine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Use top right option to to set cusine preference!"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            tools:layout_editor_absoluteX="129dp"
+            tools:layout_editor_absoluteY="0dp" />
+
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"

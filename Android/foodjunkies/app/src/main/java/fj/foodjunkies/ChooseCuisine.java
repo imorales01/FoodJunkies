@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,22 +27,38 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class ChooseCuisine extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-    private static final String URL = "http://54.208.66.68:80/setdefaultRating.php";
+
+    private static final String defaultURL = "http://54.208.66.68:80/setdefaultRating.php";
+    private static final String likeURL = "http://54.208.66.68:80/likeCuisine.php";
+    private static final String dislikeURL = "http://54.208.66.68:80/dislikeCuisine.php";
+
     private StringRequest request;
     private String userID;
 
     private ListView listView;
     private ArrayAdapter<String> adapter;
     ArrayList<String> arrayListCuisines;
+
+    String[] originalCuisines = new String[] {
+            "Italian", "Spanish", "Chinese", "Indian", "Japanese", "Mediterranean", "Middle Eastern", "American", "Korean", "European"
+    };
+
+    String[] cuisines = new String[] {
+            "Italian", "Spanish", "Chinese", "Indian", "Japanese", "Mediterranean", "Middle Eastern", "American", "Korean", "European"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +68,8 @@ public class ChooseCuisine extends AppCompatActivity {
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         userID = sharedPref.getString("userID", "");
 
+        setTitle("Customizing cuisines...");
+
         //set up volley
         requestQueue = Volley.newRequestQueue(this);
 
@@ -59,10 +78,6 @@ public class ChooseCuisine extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listView);
         arrayListCuisines = new ArrayList<String>();
-
-        String[] cuisines = new String[] {
-                "American", "Chinese", "European", "Indian", "Italian", "Japanese", "Korean", "Mediterranean", "Middle Eastern", "Spanish"
-        };
 
         Collections.addAll(arrayListCuisines, cuisines);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayListCuisines);
@@ -78,6 +93,8 @@ public class ChooseCuisine extends AppCompatActivity {
         menu.add("Select Single");
         menu.add("Select Multiple");
         menu.add("Select All");
+        //menu.add("Reset");
+        menu.add("Delete");
 
         return true;
     }
@@ -126,40 +143,66 @@ public class ChooseCuisine extends AppCompatActivity {
             for (int itemPosition = 0; itemPosition < listView.getAdapter().getCount(); itemPosition++) {
                 listView.setItemChecked(itemPosition, true);
             }
+        }
+        /*else if(title.equals("Reset")) {
+            adapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_list_item_1, originalCuisines);
+            listView.setAdapter(adapter);
+        }*/
+        else if (title.equals("Delete")) {
 
-            // create an alert dialog
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                    this);
-            alertDialogBuilder.setTitle("Confirm");
-            alertDialogBuilder
-                    .setMessage("Delete All?")
-                    .setPositiveButton("Delete",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            SparseBooleanArray checked = listView.getCheckedItemPositions();
+            //7. For delete, we remove the selected elements from the array list
 
-                            for (int i = listView.getCount() - 1; i >= 0; i--) {
-                                if (checked.get(i) == true)
-                                    arrayListCuisines.remove(i);
-                            }
-                            adapter.notifyDataSetChanged();
-                            listView.clearChoices();
-                        }
-                    })
-                    .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
+            if (listView.getChoiceMode() != ListView.CHOICE_MODE_NONE) {
+                SparseBooleanArray checked = listView.getCheckedItemPositions();
+
+                // get the position of every checked item and using remove() method delete those items.
+                for (int i = listView.getCount() - 1; i >= 0; i--) {
+                    if (checked.get(i) == true) {
+                        originalCuisines[i] = "deleted";
+                        arrayListCuisines.remove(i);
+                    }
+                }
+
+                for(int j = 0; j < originalCuisines.length; j++) {
+                    if(originalCuisines[j].equals("deleted")) {
+                        String dislikeCuisineID = String.valueOf(j+1);
+                        setDislikeRating(dislikeCuisineID);
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+                // Clear our choices
+                listView.clearChoices();
+
+            }
         }
 
         return true;
     }
 
+    public void doneButtonClick(View view) {
+        // Start the profile activity
+
+        //setDefaultRating();
+
+        if (listView.getChoiceMode() != ListView.CHOICE_MODE_NONE) {
+            SparseBooleanArray checked = listView.getCheckedItemPositions();
+
+            for (int i = 0; i < listView.getCount(); i++) {
+                if (checked.get(i) == true) {
+                    String likeCuisineID = String.valueOf(i+1);
+                    setLikeRating(likeCuisineID);
+                }
+            }
+        }
+
+        startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Constraints.class));
+    }
+
     public void setDefaultRating(){
 
-        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        request = new StringRequest(Request.Method.POST, defaultURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -198,9 +241,87 @@ public class ChooseCuisine extends AppCompatActivity {
         requestQueue.add(request);
     }
 
-    public void doneButtonClick(View view) {
-        // Start the profile activity
-        finish();
-        startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Constraints.class));
+    public void setLikeRating(final String cusID){
+
+        request = new StringRequest(Request.Method.POST, likeURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
+                    }
+                    if (jsonObject.names().get(0).equals("fail")) {
+                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("User_ID", userID);
+                hashMap.put("Cus_ID", cusID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    public void setDislikeRating(final String cusID){
+
+        request = new StringRequest(Request.Method.POST, dislikeURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
+                    }
+                    if (jsonObject.names().get(0).equals("fail")) {
+                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("User_ID", userID);
+                hashMap.put("Cus_ID", cusID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
     }
 }
