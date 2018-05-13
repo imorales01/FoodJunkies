@@ -49,7 +49,7 @@ public class Welcome extends Activity {
         quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), fj.foodjunkies.ChooseCuisine.class));
+                startActivity(new Intent(getApplicationContext(), fj.foodjunkies.CuisineQuiz.class));
 
             }
         });

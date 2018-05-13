@@ -3,11 +3,14 @@ package fj.foodjunkies;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.ImageView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,16 +30,21 @@ import java.util.Random;
 
 public class Recommend extends AppCompatActivity {
 
-    Button getCuisine, recommendDish, getName, showRec;
+
+
     RequestQueue requestQueue;
+
     //URLS to php scripts
     String getRatings = "http://54.208.66.68:80/getRatings.php";
     String getDishes = "http://54.208.66.68:80/getDishes.php";
     String getDishName = "http://54.208.66.68:80/getDishName.php";
 
-    TextView showDish;
+    Button seeRestaurants;
+    Button reRoll;
     TextView showName;
+    ImageView dishImage;
     private StringRequest request;
+    private String dishURL;
     private String userID;
     //Stores dishes of picked cuisine
     private Integer[] dishID = new Integer[10];
@@ -49,21 +59,24 @@ public class Recommend extends AppCompatActivity {
 
     //Specific Dish recommendation, Dish_ID
     String recommendationID;
-
     //Specific Cuisine recommendation, Cus_ID
     String cusID;
+
+    private Context context = Recommend.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
+        ActionBar actionBar = getSupportActionBar(); //Set back button on the title bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle("Recommendations");
 
-        getName = (Button) findViewById(R.id.GetName);
-        showRec = (Button) findViewById(R.id.ShowRecommendation);
-        showDish = (TextView) findViewById(R.id.textView4);
+
         showName = (TextView) findViewById(R.id.Namehere);
-        getCuisine = (Button) findViewById(R.id.button5);
-        recommendDish = (Button) findViewById(R.id.button6);
+        reRoll = (Button) findViewById(R.id.button5);
+        dishImage = findViewById(R.id.imageView);
+        seeRestaurants = (Button) findViewById(R.id.button7);
 
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         userID = sharedPref.getString("userID", "");
@@ -71,24 +84,22 @@ public class Recommend extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
 
         //Get ratings from database, store in cusRatings[]
-        getRatings();
+        getRecommendation();
 
 
         System.out.println("Check cusRatings: " +cusRatings[1]);
 
         //Button, on click picks a cuisine and gets its dishes, puts dish IDs in dishID[]
-        getCuisine.setOnClickListener(new View.OnClickListener() {
+        reRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                //System.out.println("Check cusRatings: " +cusRatings[1]);
 
                 String test;
                 Integer temp;
                 temp = pickCuisine(cusRatings);
                 test = String.valueOf(temp);
-                String toSet = "cusID: " + test;
-                getCuisine.setText(toSet);
+                System.out.println("Check cusID: " + test);
                 cusID = test;
 
                 getDishes();
@@ -97,47 +108,18 @@ public class Recommend extends AppCompatActivity {
         });
 
 
-        //Button, on click picks a dish and gets its ID, puts dish IDs in recommendationID
-        recommendDish.setOnClickListener(new View.OnClickListener() {
+        //Button, on click goes to restaurants
+        seeRestaurants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                System.out.println("Check dishID: " +dishID[1]);
-
-                Integer randomIndex = generator.nextInt(dishID.length);
-                System.out.println("Check randomIndex: " +randomIndex);
-                Integer temp = dishID[randomIndex];
-                String toString = String.valueOf(temp);
-                showDish.setText(toString);
-                recommendationID = toString;
-            }
-        });
-
-
-        //Button, on click gets the name of dish recommendation and stores it in recName
-        getName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                System.out.println("Check recommendationID: " +recommendationID);
-                getName();
-            }
-        });
-
-        //Button, displays recommendation name on screen
-        showRec.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                System.out.println("Check recName: " + recName);
-
-                showName.setText(recName);
-
+                //This goes to restaurants page yo
                 Intent intent = new Intent(getApplicationContext(), SelectRestaurant.class);
                 intent.putExtra("RECOMMEND", recName);
                 startActivity(intent);
             }
         });
+
+
 
     }
 
@@ -173,7 +155,9 @@ public class Recommend extends AppCompatActivity {
 
     //Gets cuisine ratings of current user
     //Results are stored in cusRatings array
-    public void getRatings (){
+    //Picks cuisine to be recommended, stores the cuisine ID in cusID
+    //Makes a call to get specific dish recommendation
+    public void getRecommendation (){
         request = new StringRequest(Request.Method.POST, getRatings, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -194,9 +178,18 @@ public class Recommend extends AppCompatActivity {
                         //Store in cusRatings
                         cusRatings[i] = b;
 
-                        //System.out.println("Check cusRatings:" +cusRatings[i]);
 
                     }
+
+                    String test;
+                    Integer temp;
+                    temp = pickCuisine(cusRatings);
+                    test = String.valueOf(temp);
+                    String toSet = "cusID: " + test;
+                    System.out.println("Check cusID:" +toSet);
+                    cusID = test;
+
+                    getDishes();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -245,9 +238,24 @@ public class Recommend extends AppCompatActivity {
                         //Store in dishID
                         dishID[i] = d;
 
-                        //System.out.println("Check dish:" + dishID[i]);
+
+
+
 
                     }
+
+                    System.out.println("Check dishID: " +dishID[1]);
+
+                    Integer randomIndex = generator.nextInt(dishID.length);
+                    System.out.println("Check randomIndex: " +randomIndex);
+                    Integer temp = dishID[randomIndex];
+                    String toString = String.valueOf(temp);
+                    recommendationID = toString;
+
+
+                    System.out.println("Check recommendationID: " +recommendationID);
+                    getName();
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -287,15 +295,26 @@ public class Recommend extends AppCompatActivity {
                         JSONObject name = names.getJSONObject(i);
 
                         String recommend = name.getString("Name");
+                        String dishURLhere = name.getString("Url");
 
-                        //Change to int
+                        dishURL = dishURLhere;
+
 
                         //Store in dishID
                         recName = recommend;
 
-                        //System.out.println("Check recName:" + recName);
 
                     }
+
+                    String temp = recName;
+                    System.out.println("Check recName: " +temp);
+                    System.out.println("Check dishURL: " +dishURL);
+
+                    showName.setText(temp);
+
+                    Glide.with(context).load(dishURL).into(dishImage);
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -316,12 +335,13 @@ public class Recommend extends AppCompatActivity {
             }
         };
         requestQueue.add(request);
-
-
     }
 
+    //Go back to the previous activity on back arrow press
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(Recommend.this, Welcome.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
 
 }
-
-
-

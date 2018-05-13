@@ -9,125 +9,77 @@
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="23dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="226dp"
-        android:text="1.getCuisine"
-        app:layout_constraintBottom_toTopOf="@+id/ShowRecommendation"
-        app:layout_constraintEnd_toStartOf="@+id/button6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="282dp"
-        android:layout_marginEnd="155dp"
-        android:layout_marginLeft="171dp"
-        android:layout_marginRight="155dp"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="210dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.368"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginEnd="34dp"
-        android:layout_marginLeft="23dp"
-        android:layout_marginRight="34dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="180dp"
-        android:text="2.getDish"
-        app:layout_constraintBottom_toTopOf="@+id/ShowRecommendation"
-        app:layout_constraintEnd_toStartOf="@+id/GetName"
-        app:layout_constraintStart_toEndOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="19dp"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginLeft="163dp"
-        android:layout_marginRight="163dp"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="164dp"
-        android:text="ID of recommended dish:"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/GetName"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="19dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="226dp"
-        android:text="3.GetName"
-        app:layout_constraintBottom_toTopOf="@+id/ShowRecommendation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button6"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <Button
-        android:id="@+id/ShowRecommendation"
-        android:layout_width="208dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginLeft="88dp"
-        android:layout_marginRight="88dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="3dp"
-        android:text="4. ShowRecommendation"
+        android:layout_marginBottom="77dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginRight="99dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="98dp"
+        android:text="New Recommendation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/Namehere" />
 
     <TextView
         android:id="@+id/NameOf"
         android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:layout_marginEnd="99dp"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="99dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="231dp"
         android:text="Name of recommended dish:"
         app:layout_constraintBottom_toTopOf="@+id/Namehere"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Namehere"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="190dp"
-        android:layout_marginEnd="191dp"
-        android:layout_marginLeft="190dp"
-        android:layout_marginRight="191dp"
-        android:layout_marginStart="190dp"
-        android:layout_marginTop="302dp"
+        android:layout_marginBottom="228dp"
+        android:layout_marginTop="15dp"
+        android:text="dish"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NameOf" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="156dp"
+        android:layout_marginLeft="156dp"
+        android:layout_marginRight="156dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/NameOf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginLeft="117dp"
+        android:layout_marginRight="116dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="13dp"
+        android:text="See Restaurants"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
 </android.support.constraint.ConstraintLayout>

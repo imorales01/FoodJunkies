@@ -1,12 +1,12 @@
 package fj.foodjunkies;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.TextView;
 
 public class Constraints extends AppCompatActivity {
@@ -33,8 +33,10 @@ public class Constraints extends AppCompatActivity {
         setContentView(R.layout.activity_constraints);
         db = new fj.foodjunkies.DataBaseHelper(this); //Create a DataBaseHelper to query the database
 
-        ID=1; //Temporary ID for testing, feed in current ID from another activity
-
+        //Get the current user ID
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String userID = sharedPref.getString("userID", "");
+        ID=Integer.valueOf(userID);
         seekBar(ID); //Create the seek bars
     }
 

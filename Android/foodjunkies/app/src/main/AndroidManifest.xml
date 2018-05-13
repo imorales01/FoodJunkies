@@ -19,8 +19,8 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,20 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Welcome">
-
-        </activity>
-
+        <activity android:name=".Welcome" />
         <activity android:name=".quiz" />
         <activity android:name=".Recommend" />
         <activity android:name=".ChooseCuisine" />
         <activity android:name=".Constraints" />
-
-        <activity android:name=".SelectRestaurant">
-        </activity>
-
-        <activity android:name=".DisplayRestaurant"/>
+        <activity android:name=".SelectRestaurant" />
+        <activity android:name=".DisplayRestaurant" />
+        <activity android:name=".RatePage"></activity>
+        <activity android:name=".RateQuestions" />
+        <activity android:name=".CuisineQuiz"></activity>
     </application>
 
 </manifest>

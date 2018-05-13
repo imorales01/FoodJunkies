@@ -2,6 +2,7 @@ package fj.foodjunkies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -50,7 +51,8 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
     private String id;
 
     private fj.foodjunkies.DataBaseHelper db;
-    private int userID = 1; //Current user
+
+    private int userID; //Current user
     private android.location.Location location;
 
     private int REQUEST_LOCATION_ACCESS = 1;
@@ -78,6 +80,11 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                 return;
             }
         }
+
+        //Get the current user ID
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String ID = sharedPref.getString("userID", "");
+        userID = Integer.valueOf(ID);
 
         //Get an intent extra from the Recommend activity which will contain the food to search for
         Intent intent = getIntent();

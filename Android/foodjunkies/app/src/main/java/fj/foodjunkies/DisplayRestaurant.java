@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,10 +80,16 @@ public class DisplayRestaurant extends AppCompatActivity {
         textViewRating.append(intent.getStringExtra("rating") + "/5");
 
         // use the space below to after simon finishes his history page to save a specific restaurant to history using business id
-        /*
+
         buttonSave = (Button) findViewById(R.id.buttonSave);
-        buttonSave.setOnClickListener();
-        */
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Open up the rating page
+                startActivity(new Intent(getApplicationContext(), RatePage.class));
+            }
+        });
+
 
         Glide.with(this).load(imageURL).into(restaurantImage);
     }
