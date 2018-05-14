@@ -254,34 +254,4 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
     @Override
     public void onProviderDisabled(String provider) {
     }
-
-    //Class to hold information on a restaurant
-    public class Restaurant {
-        Restaurant ()
-        {
-            name="";
-        }
-
-        Restaurant (String id, String name, String address, String phone, String price,
-                    double rating, double distance, String imageURL)
-        {
-            this.id = id;
-            this.name = name;
-            this.address = address;
-            this.phone = phone;
-            this.price = price;
-            this.rating = rating;
-            this.distance = distance;
-            this.imageURL = imageURL;
-        }
-
-        public String id;
-        public String name;
-        public String address;
-        public String phone;
-        public String price;
-        public String imageURL;
-        public double distance;
-        public double rating;
-    }
 }
