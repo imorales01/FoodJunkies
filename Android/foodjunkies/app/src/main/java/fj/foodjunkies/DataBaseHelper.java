@@ -72,7 +72,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues values= new ContentValues(); //Prepare content values to update
         values.put(KEY_BUDGET, budget);
         String id_number= valueOf(ID); //Convert the ID to a string to update the table
-        return db.update(TABLE_NAME, values, KEY_ID + " =?", new String[]{id_number}); //Update constraints where IDs match
+        int returnValue = db.update(TABLE_NAME, values, KEY_ID + " =?", new String[]{id_number}); //Update constraints where IDs match
+        db.close();
+        return returnValue;
     }
 
     /*
@@ -83,7 +85,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues values= new ContentValues(); //Prepare content values to update
         values.put(KEY_DISTANCE, distance);
         String id_number= valueOf(ID); //Convert the ID to a string to update the table
-        return db.update(TABLE_NAME, values, KEY_ID + " =?", new String[]{id_number}); //Update constraints where IDs match
+        int returnValue = db.update(TABLE_NAME, values, KEY_ID + " =?", new String[]{id_number}); //Update constraints where IDs match
+        db.close();
+        return returnValue;
     }
 
     /*
@@ -94,7 +98,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         ContentValues values= new ContentValues(); //Prepare content values to update
         values.put(KEY_TIME, time);
         String id_number= valueOf(ID); //Convert the ID to a string to update the table
-        return db.update(TABLE_NAME, values, KEY_ID + " =?", new String[]{id_number}); //Update constraints where IDs match
+        int returnValue = db.update(TABLE_NAME, values, KEY_ID + " =?", new String[]{id_number}); //Update constraints where IDs match
+        db.close();
+        return returnValue;
     }
 
     /*
@@ -139,6 +145,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(ID)}, null, null, null, null);
         if (cursor!=null) //If the cursor found the entry move to the first instance
             cursor.moveToFirst();
+        db.close();
         return cursor.getInt(1); //Get the budget in position 1 of the table
     }
 
@@ -153,6 +160,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(ID)}, null, null, null, null);
         if (cursor!=null)
             cursor.moveToFirst();
+        db.close();
         return cursor.getInt(2);
     }
 
@@ -167,6 +175,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(ID)}, null, null, null, null);
         if (cursor!=null)
             cursor.moveToFirst();
+        db.close();
         return cursor.getInt(3);
     }
 }

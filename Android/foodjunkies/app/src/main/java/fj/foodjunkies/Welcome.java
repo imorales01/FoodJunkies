@@ -41,7 +41,6 @@ public class Welcome extends Activity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Recommend.class));
-
             }
         });
 

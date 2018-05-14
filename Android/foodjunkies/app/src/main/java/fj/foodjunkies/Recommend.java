@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
+
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,15 +32,17 @@ import java.util.Random;
 
 public class Recommend extends AppCompatActivity {
 
-
-
     RequestQueue requestQueue;
 
     //URLS to php scripts
     String getRatings = "http://54.208.66.68:80/getRatings.php";
     String getDishes = "http://54.208.66.68:80/getDishes.php";
     String getDishName = "http://54.208.66.68:80/getDishName.php";
+    String dislike_Dish = "http://54.208.66.68:80/dislikeDish.php";
+    String dislike_CuisineDish = "http://54.208.66.68:80/dislikeCuisineDish.php";
+    String get_DishCuisine = "http://54.208.66.68:80/getDishCuisine.php";
 
+    Button dislike;
     Button seeRestaurants;
     Button reRoll;
     TextView showName;
@@ -72,37 +76,35 @@ public class Recommend extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle("Recommendations");
 
-
+        dislike = (Button) findViewById(R.id.button8);
         showName = (TextView) findViewById(R.id.Namehere);
         reRoll = (Button) findViewById(R.id.button5);
-        dishImage = findViewById(R.id.imageView);
+        dishImage = findViewById(R.id.imageView5);
         seeRestaurants = (Button) findViewById(R.id.button7);
+
+        dishImage.setVisibility(View.INVISIBLE);
 
         SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         userID = sharedPref.getString("userID", "");
 
         requestQueue = Volley.newRequestQueue(this);
 
-        //Get ratings from database, store in cusRatings[]
-        getRecommendation();
+        //Gets ratings from database, stores in cusRatings[]
+        //Picks a cuisine and gets its dishes, puts dish IDs in dishID[]
+        //Recommends dish
+        //Puts Cus_ID in cusID and recommended Dish_ID in recommendationID
+        initialRecommendation();
 
 
         System.out.println("Check cusRatings: " +cusRatings[1]);
 
         //Button, on click picks a cuisine and gets its dishes, puts dish IDs in dishID[]
+        //Puts Cus_ID in cusID and recommended Dish_ID in recommendationID
         reRoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                String test;
-                Integer temp;
-                temp = pickCuisine(cusRatings);
-                test = String.valueOf(temp);
-                System.out.println("Check cusID: " + test);
-                cusID = test;
-
-                getDishes();
+                furtherRecommendation();
 
             }
         });
@@ -112,10 +114,21 @@ public class Recommend extends AppCompatActivity {
         seeRestaurants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //This goes to restaurants page yo
                 Intent intent = new Intent(getApplicationContext(), SelectRestaurant.class);
                 intent.putExtra("RECOMMEND", recName);
                 startActivity(intent);
+            }
+        });
+
+        //Button, on click dislikes Dish
+        dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dislikeDish();
+
             }
         });
 
@@ -157,7 +170,7 @@ public class Recommend extends AppCompatActivity {
     //Results are stored in cusRatings array
     //Picks cuisine to be recommended, stores the cuisine ID in cusID
     //Makes a call to get specific dish recommendation
-    public void getRecommendation (){
+    public void initialRecommendation (){
         request = new StringRequest(Request.Method.POST, getRatings, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -181,15 +194,7 @@ public class Recommend extends AppCompatActivity {
 
                     }
 
-                    String test;
-                    Integer temp;
-                    temp = pickCuisine(cusRatings);
-                    test = String.valueOf(temp);
-                    String toSet = "cusID: " + test;
-                    System.out.println("Check cusID:" +toSet);
-                    cusID = test;
-
-                    getDishes();
+                    furtherRecommendation();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -217,6 +222,9 @@ public class Recommend extends AppCompatActivity {
 
     //Gets dishes from a specified cuisine (cuisine ID is stored in class variable "cusID")
     //Results are stored in dishID array
+    //Then selects a random item from this array
+    //The result is the recommendation and its id is stored in recommendationID
+    //Last, a call is made to get its name and display the dishes image
     public void getDishes(){
 
         request = new StringRequest(Request.Method.POST, getDishes, new Response.Listener<String>() {
@@ -244,7 +252,7 @@ public class Recommend extends AppCompatActivity {
 
                     }
 
-                    System.out.println("Check dishID: " +dishID[1]);
+                    System.out.println("Check if dishes loaded: " +dishID[1]);
 
                     Integer randomIndex = generator.nextInt(dishID.length);
                     System.out.println("Check randomIndex: " +randomIndex);
@@ -299,21 +307,32 @@ public class Recommend extends AppCompatActivity {
 
                         dishURL = dishURLhere;
 
-
-                        //Store in dishID
                         recName = recommend;
 
 
                     }
 
-                    String temp = recName;
-                    System.out.println("Check recName: " +temp);
+                    System.out.println("Check recName: " +recName);
                     System.out.println("Check dishURL: " +dishURL);
 
-                    showName.setText(temp);
+                    showName.setText(recName);
 
                     Glide.with(context).load(dishURL).into(dishImage);
+                    dishImage.setVisibility(View.VISIBLE);
 
+                    SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("cusID", cusID );
+                    editor.putString("dishID", recommendationID);
+                    editor.apply();
+
+
+                    /*  //For testing purposes
+                    String cusiID, dishiID;
+                    sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                    dishiID = sharedPref.getString("dishID", "");
+                    cusiID = sharedPref.getString("cusID", "");
+                    System.out.println("Check shared prefs: " + dishiID + " and " + cusiID); */
 
 
                 } catch (JSONException e) {
@@ -335,6 +354,105 @@ public class Recommend extends AppCompatActivity {
             }
         };
         requestQueue.add(request);
+
+
+    }
+
+
+    public void dislikeDish(){
+
+        request = new StringRequest(Request.Method.POST, dislike_Dish, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+
+                    if (jsonObject.names().get(0).equals("success")) {
+                        dislikeDishCuisine();
+                        System.out.println("SUCCESS " + jsonObject.getString("success"));
+                    }
+                    if (jsonObject.names().get(0).equals("fail")) {
+                        System.out.println("Fail " + jsonObject.getString("fail"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("User_ID", userID);
+                hashMap.put("Dish_ID", recommendationID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    public void dislikeDishCuisine(){
+
+        request = new StringRequest(Request.Method.POST, dislike_CuisineDish, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    if (jsonObject.names().get(0).equals("success")) {
+                        System.out.println("SUCCESS " + jsonObject.getString("success"));
+                        furtherRecommendation();
+                    }
+                    if (jsonObject.names().get(0).equals("fail")) {
+                        System.out.println("Fail " + jsonObject.getString("fail"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("User_ID", userID);
+                hashMap.put("Cus_ID", cusID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    public void furtherRecommendation(){
+
+        String test;
+        Integer temp;
+        temp = pickCuisine(cusRatings);
+        test = String.valueOf(temp);
+        System.out.println("Check cusID:" + test);
+        cusID = test;
+
+        getDishes();
+
     }
 
     //Go back to the previous activity on back arrow press
@@ -343,5 +461,7 @@ public class Recommend extends AppCompatActivity {
         startActivityForResult(myIntent, 0);
         return true;
     }
+
+
 
 }

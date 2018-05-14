@@ -1,6 +1,8 @@
 package fj.foodjunkies;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,19 +16,40 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import link.fls.swipestack.SwipeStack;
 
 public class CuisineQuiz extends AppCompatActivity {
 
-    ArrayList<String> cuisineStack;
-    ArrayList<Integer> images;
-    boolean [] preference;
+    private static final String defaultURL = "http://54.208.66.68:80/setdefaultRating.php";
+    private static final String likeURL = "http://54.208.66.68:80/likeCuisine.php";
+    private static final String dislikeURL = "http://54.208.66.68:80/dislikeCuisine.php";
 
-    ImageView like;
-    ImageView dislike;
+    private RequestQueue requestQueue;
+    private StringRequest request;
+    private String userID;
+
+    private ArrayList<String> cuisineStack;
+    private ArrayList<Integer> images;
+    private boolean [] preference;
+
+    private ImageView like;
+    private ImageView dislike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,31 +64,41 @@ public class CuisineQuiz extends AppCompatActivity {
         like.setVisibility(View.INVISIBLE);
         dislike.setVisibility(View.INVISIBLE);
 
+        //Get current userID
+        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        userID = sharedPref.getString("userID", "");
+
+        //Set up volley
+        requestQueue = Volley.newRequestQueue(this);
+
+        //Run the function to set default ratings
+        setDefaultRating();
+
         //Create a list of cuisines for the user to like/dislike
         cuisineStack = new ArrayList<String>();
-        cuisineStack.add("American");
-        cuisineStack.add("Chinese");
-        cuisineStack.add("Korean");
-        cuisineStack.add("European");
-        cuisineStack.add("Indian");
         cuisineStack.add("Italian");
+        cuisineStack.add("Spanish");
+        cuisineStack.add("Chinese");
+        cuisineStack.add("Indian");
         cuisineStack.add("Japanese");
         cuisineStack.add("Mediterranean");
         cuisineStack.add("Middle Eastern");
-        cuisineStack.add("Spanish");
+        cuisineStack.add("American");
+        cuisineStack.add("Korean");
+        cuisineStack.add("European");
 
-        //Create an ArrayList to hold the R.id of the images to be loaded corresponding to the cuisines
+        //Create an ArrayList to hold the resource id of the images to be loaded corresponding to the cuisines
         images = new ArrayList<Integer>();
-        images.add(R.drawable.american);
-        images.add(R.drawable.chinese);
-        images.add(R.drawable.korean);
-        images.add(R.drawable.european);
-        images.add(R.drawable.indian);
         images.add(R.drawable.italian);
+        images.add(R.drawable.spanish);
+        images.add(R.drawable.chinese);
+        images.add(R.drawable.indian);
         images.add(R.drawable.japanese);
         images.add(R.drawable.mediterranean);
         images.add(R.drawable.middleeastern);
-        images.add(R.drawable.spanish);
+        images.add(R.drawable.american);
+        images.add(R.drawable.korean);
+        images.add(R.drawable.european);
 
         //Create an array of booleans that stores if the user liked or disliked the cuisine
         preference = new boolean [10];
@@ -105,8 +138,17 @@ public class CuisineQuiz extends AppCompatActivity {
             @Override
             public void onStackEmpty() {
                 //Save the user's preferences into the MySQL server
-
-                //              Toast.makeText(getApplicationContext(), "Empty", Toast.LENGTH_SHORT).show();
+                //Parse through the array of likes/dislikes and save them to the MySQL server
+                for (int i=0; i<10; i++) {
+                    if (preference[i]==true){ //If the user liked the cuisine
+                        String likeCuisineID = String.valueOf(i+1); //The MySQL sever starts at an index of 1, so increment
+                        setLikeRating(likeCuisineID);
+                    }
+                    else { //If the user disliked the cuisine
+                        String dislikeCuisineID = String.valueOf(i+1);
+                        setDislikeRating(dislikeCuisineID);
+                    }
+                }
                 startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Constraints.class));
             }
         };
@@ -150,6 +192,126 @@ public class CuisineQuiz extends AppCompatActivity {
 
             return convertView;
         }
+    }
+
+    //If the user disliked a cuisine then send a POST request to the MySQL server to update values
+    public void setDislikeRating(final String cusID){
+
+        request = new StringRequest(Request.Method.POST, dislikeURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+/*
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
+                    }
+                    if (jsonObject.names().get(0).equals("fail")) {
+                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
+                    }
+*/
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("User_ID", userID);
+                hashMap.put("Cus_ID", cusID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    //If the user liked a cuisine then send a POST request to the MySQL server to update values
+    public void setLikeRating(final String cusID){
+
+        request = new StringRequest(Request.Method.POST, likeURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+/*
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
+                    }
+                    if (jsonObject.names().get(0).equals("fail")) {
+                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
+                    }
+*/
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("User_ID", userID);
+                hashMap.put("Cus_ID", cusID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    //Set the default rating for the user in the MySQL server
+    public void setDefaultRating(){
+
+        request = new StringRequest(Request.Method.POST, defaultURL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+/*
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
+                    }
+                    if (jsonObject.names().get(0).equals("fail")) {
+                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
+                    }
+*/
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("User_ID", userID);
+
+                return hashMap;
+            }
+        };
+        requestQueue.add(request);
     }
 
     //Go back to the previous activity on back arrow press

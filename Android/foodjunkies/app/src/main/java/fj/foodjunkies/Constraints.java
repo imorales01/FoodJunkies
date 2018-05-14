@@ -3,13 +3,16 @@ package fj.foodjunkies;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class Constraints extends AppCompatActivity {
+
     private static fj.foodjunkies.DataBaseHelper db;
 
     private static SeekBar budget_bar;
@@ -26,11 +29,14 @@ public class Constraints extends AppCompatActivity {
 
     private int ID;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_constraints);
+        ActionBar actionBar = getSupportActionBar(); //Set back button on the title bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        setTitle("Constraints");
+
         db = new fj.foodjunkies.DataBaseHelper(this); //Create a DataBaseHelper to query the database
 
         //Get the current user ID
@@ -47,7 +53,6 @@ public class Constraints extends AppCompatActivity {
         db.updateTime(ID,time); //Update the time constraints for the user in a database
         startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Welcome.class));
     }
-
 
     //Seek Bar saves the information from the user with sliders
     public void seekBar(final int ID){
@@ -143,5 +148,11 @@ public class Constraints extends AppCompatActivity {
                     }
                 }
         );
+    }
+    //Go back to the previous activity on back arrow press
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(Constraints.this, Welcome.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 }

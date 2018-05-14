@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fj.foodjunkies.RatePage">
+    tools:context="fj.foodjunkies.History">
+
     <ImageView
         android:id="@+id/sunsetRestaurant"
         android:layout_width="wrap_content"
@@ -50,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="RATE YOUR EXPERIENCE"
+        android:text="PAST RESTAURANTS"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -61,13 +62,12 @@
     <ListView
         android:id="@+id/rateList"
         android:layout_width="368dp"
-        android:layout_height="379dp"
+        android:layout_height="396dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/greyBackground"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
-
+        app:layout_constraintVertical_bias="0.966" />
 
 </android.support.constraint.ConstraintLayout>

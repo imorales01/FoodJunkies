@@ -14,7 +14,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/mcd"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
@@ -27,17 +27,39 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            android:screenOrientation="portrait"
         </activity>
-        <activity android:name=".Welcome" />
-        <activity android:name=".quiz" />
-        <activity android:name=".Recommend" />
-        <activity android:name=".ChooseCuisine" />
-        <activity android:name=".Constraints" />
-        <activity android:name=".SelectRestaurant" />
-        <activity android:name=".DisplayRestaurant" />
-        <activity android:name=".RatePage"></activity>
-        <activity android:name=".RateQuestions" />
-        <activity android:name=".CuisineQuiz"></activity>
+        <activity
+            android:name=".Welcome"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".quiz"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Recommend"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChooseCuisine"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Constraints"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SelectRestaurant"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DisplayRestaurant"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RatePage"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RateQuestions"
+            android:screenOrientation="portrait" />
+        <activity android:name=".CuisineQuiz">
+            android:screenOrientation="portrait"
+        </activity>
+        <activity android:name=".History"></activity>
     </application>
 
 </manifest>

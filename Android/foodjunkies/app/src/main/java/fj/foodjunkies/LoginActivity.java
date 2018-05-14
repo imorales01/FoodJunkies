@@ -123,14 +123,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(),"SUCCESSFULLY LOGGED IN. UserID:"+temp,Toast.LENGTH_LONG).show();
 
-/* @@@@@@@@@@@ Code to start Quiz and Constraints on first download, if existing user send to Welcome
                                 if (isFirstTime()){ //If it is the user's first time, send them to the quiz and constraints page
                                     startActivity(new Intent(getApplicationContext(), ChooseCuisine.class));
                                 }
                                 else { //If it is an existing user, go to the homepage
                                     startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Welcome.class));
                                 }
- */
+
                                 startActivity(new Intent(getApplicationContext(),Welcome.class));
 
                             } if(jsonObject.names().get(0).equals("created")) {
