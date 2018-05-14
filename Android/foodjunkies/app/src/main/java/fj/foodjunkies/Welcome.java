@@ -1,3 +1,12 @@
+/**
+ * @Welcome.java
+ *
+ * The home screen page that users will be greeted with upon signing in. This page acts as the hub
+ * of the app, and allows the user to reach every other page. On this page the user can access the
+ * Recommendation, Search, Quiz, Constraints, History, Rating, pages.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.app.Activity;
@@ -7,52 +16,79 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Welcome extends Activity {
 
-    private Button log_out;
-    private Button recommend;
-    private Button quiz;
+    private Button buttonQuiz;
+    private Button buttonSearch;
+    private Button buttonRecommend;
+    private Button buttonLogout;
+    private Button buttonHistory;
+    private Button buttonRate;
+    private Button buttonConstraints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
-        TextView displayID = (TextView)findViewById(R.id.displayID);
-
-        SharedPreferences sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-
-        String userID = sharedPref.getString("userID", "");
-        displayID.setText(userID);
-
-        log_out = (Button) findViewById(R.id.button);
-        log_out.setOnClickListener(new View.OnClickListener() {
+        buttonQuiz = (Button) findViewById(R.id.buttonQuiz);
+        buttonQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), fj.foodjunkies.LoginActivity.class));
+                startActivity(new Intent(getApplicationContext(), fj.foodjunkies.CuisineQuiz.class));
+            }
+        });
+
+        buttonSearch = (Button) findViewById(R.id.buttonSearch);
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Search.class));
 
             }
         });
 
-        recommend = (Button) findViewById(R.id.button3);
-        recommend.setOnClickListener(new View.OnClickListener() {
+        buttonRecommend = (Button) findViewById(R.id.buttonRecommend);
+        buttonRecommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Recommend.class));
             }
         });
 
-        quiz = (Button) findViewById(R.id.button2);
-        quiz.setOnClickListener(new View.OnClickListener() {
+        buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), fj.foodjunkies.CuisineQuiz.class));
+                startActivity(new Intent(getApplicationContext(), fj.foodjunkies.LoginActivity.class));
+            }
+        });
 
+        buttonConstraints = (Button) findViewById(R.id.buttonConstraints);
+        buttonConstraints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Constraints.class));
+            }
+        });
+
+        buttonHistory = (Button) findViewById(R.id.buttonHistory);
+        buttonHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), History.class));
+            }
+        });
+
+        buttonRate = (Button) findViewById(R.id.buttonRate);
+        buttonRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), RatePage.class));
             }
         });
     }
-
-
 }

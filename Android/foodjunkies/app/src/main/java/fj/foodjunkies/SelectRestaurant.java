@@ -1,3 +1,16 @@
+/**
+ * @SelectRestaurant.java
+ *
+ * This page is opened after searching, or the Recommend page. The food to be searched for is
+ * passed in from one of the previous activities and the term is used to query the Yelp Fusion API
+ * and search for foods that match the user's constraints. Parameters are taken from the SQLite database
+ * for budget, distance, time. The GPS location is received and these parameters are POST to the
+ * API. Upon receiving the results they are parsed and put into a Restaurant Object. The information is
+ * then used to display as a ListView for selecting. Upon selecting a restaurant, the relevant information
+ * is passed to the next activity DisplayRestaurant, which provides the user with more information.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.Context;
@@ -36,15 +49,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class SelectRestaurant extends AppCompatActivity implements android.location.LocationListener {
 
     //Parameters and constraints for the Yelp API
     private String apiKey = "oNavXIvI6AgPNIM-fsgq2EBTWIJJKySS0yE-t-ANnOMTaJKiJJI1gT_DssXmcRCgVOgYQZQ8Jx2vPlnQ-jbjSrdaccAUT1-Qkap-wkBwQZ9MSVy_E39a1ekSI_rpWnYx";
     private String longitude = "40.7685"; //Coordinates for location, Hunter College
     private String latitude = "-73.9646";
-    private String radius = "3000"; //1 mile, 1610 meters | 5 miles, 8046.72 meters (Change values here for testing distance)
-
     private String term; //Search for term of food or restraunts
     private String limit = "3"; //Limit search to 3
     private String open_now = "true"; //Show only open stores
@@ -103,10 +113,9 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
         if (location!=null){
             Longitude = location.getLongitude();
             Latitude = location.getLatitude();
-//            Toast.makeText(getApplicationContext(), "Longitude: " + Longitude +", Latitude: " + Latitude, Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(getApplicationContext(), "Couldn't detect location. ", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "Couldn't detect location. ", Toast.LENGTH_SHORT).show(); //If the GPS coordinates were not found
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,1000,0,this); //Request a GPS update
         }
 
@@ -133,20 +142,21 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
         //Put parameters for the Yelp API GET request
         Map<String, String> params = new HashMap<>();
 
+        //Values obtained from user Constraints, and GPS location
         params.put("term", term); //The food that is searched for, obtained from the Recommendation process
-//        params.put("latitude", longitude); //Hard coded coordinates for Hunter College, used for the presentation.
-//        params.put("longitude", latitude);
         params.put("limit", limit); //Limit is 3 restraunts on display
         params.put("open_now", open_now); //Restaurant is open
-//       params.put("radius", radius);
-
-        //Values obtained from user Constraints, and GPS location
-//       params.put("radius", String.valueOf(distance)); //Radius is the distance from current position in meters
+        params.put("radius", String.valueOf(distance)); //Radius is the distance from current position in meters
         params.put("price", String.valueOf(dollarBudget)); //Budget from constraints $$$$ string value of 1,2,3, or 4
-
-        //NOTE: Location services are working, replace above with this code to use current location instead of a hard coded value
-        params.put("latitude", String.valueOf(Latitude)); //Longitude and Latitude of current GPS location
-        params.put("longitude", String.valueOf(Longitude));
+        //NOTE: Location services are working, but it is buggy and sometimes does not detect properly
+        if (location != null){
+            params.put("latitude", String.valueOf(Latitude)); //Longitude and Latitude of current GPS location
+            params.put("longitude", String.valueOf(Longitude));
+        }
+        else {
+            params.put("latitude", longitude); //Hard coded coordinates for Hunter College, used for the presentation.
+            params.put("longitude", latitude);
+        }
 
         restaurants = new ArrayList <Restaurant>(); //Initialize an empty restraunt ArrayList to store restraunts returned from the API result
 
@@ -157,13 +167,10 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
             @Override
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
                 SearchResponse searchResponse = response.body();
-                Log.d("@@@", String.valueOf(response));
 
-                int totalNumberOfResult = searchResponse.getTotal();
                 ArrayList<Business> businesses = searchResponse.getBusinesses(); //API returns an ArrayList of the business objects representing businesses found matching the paramters
                 //If the Yelp API returned restraunts matching the parameters, then parse the business objects for relevant restaurant information and save to an ArrayList
                 if (!businesses.isEmpty()){
-                    Log.d("@@@", "Size: " + String.valueOf(businesses.size()));
                     for (int i=0; i<businesses.size(); i++){
                         String businessID = businesses.get(i).getId();
                         String businessName = businesses.get(i).getName();  //Get the business name
@@ -178,7 +185,6 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                         //Create a new Restaurant object to store information on the restaurant
                         Restaurant restaurant = new Restaurant(businessID, businessName, address, phone, price, rating, milesAway, imageURL);
                         restaurants.add(restaurant); //Add to the restaurant ArrayList
-                        Log.d("@@@", "# of Restraunts found: "+ totalNumberOfResult + " / Business id: " + businessID + " / Name: " + businessName + " / Rating: " + rating + " / Address: " + address + " / Miles Away: " + milesAway);
                     }
 
                     //Create an ArrayList with the String names of the restaurants because we can't create an ArrayAdapter with ArrayList of object Food
@@ -186,9 +192,9 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
                     for (int i=0; i<restaurants.size(); i++){
                         String displayRestaurant = "\n" + restaurants.get(i).name + " ("
                                 +  restaurants.get(i).price + ") "
-                                +  "\nAddress: " + restaurants.get(i).address
+                                + "\nAddress: " + restaurants.get(i).address
                                 + "\nRating: " + restaurants.get(i).rating
-                                +"\nDistance: " + metersToMiles(businesses.get(i).getDistance()) + " miles\n";
+                                + "\nDistance: " + metersToMiles(businesses.get(i).getDistance()) + " miles\n";
                         restaurantNames.add(displayRestaurant);
                     }
 
@@ -232,7 +238,6 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
             @Override
             public void onFailure(Call<SearchResponse> call, Throwable t) {
                 // HTTP error happened, do something to handle it.
-                Log.d("@@@", "Failed to fetch API");
                 Toast.makeText(getApplicationContext(), "Sorry, we couldn't access the server!" , Toast.LENGTH_LONG).show();
             }
         };
@@ -253,11 +258,11 @@ public class SelectRestaurant extends AppCompatActivity implements android.locat
         if (budget <= 10)
             return "1";
         else if (budget > 10 && budget <= 20)
-            return "2";
+            return "1, 2";
         else if (budget > 30 && budget <= 40)
-            return "3";
+            return "1, 2, 3";
         else
-            return "4";
+            return "1, 2, 3, 4";
     }
 
     //Go back to the previous activity on back arrow press

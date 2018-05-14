@@ -1,3 +1,11 @@
+/**
+ * @History.java
+ *
+ * This page loads from the MySQL server the past restaurants that the user has been to, and displays
+ * the restaurant name, along with the dish they ate in a ListView.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.Context;

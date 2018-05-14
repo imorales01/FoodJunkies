@@ -1,3 +1,12 @@
+/**
+ * @LoginActivity.java
+ *
+ * Login screen for the app, allows user to register and sign in. This activity will signal if
+ * this is the first time the app has been opened to lead to the Quiz and Constraints. Otherwise,
+ * it will lead to the homepage.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.Intent;
@@ -21,23 +30,23 @@ import android.content.SharedPreferences;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class LoginActivity extends AppCompatActivity {
+
+    private static final String URL = "http://54.208.66.68:80/user_control2.php";
 
     private EditText Email,Password;
     private Button sign_in_register;
     private Button register;
     private RequestQueue requestQueue;
-    private static final String URL = "http://54.208.66.68:80/user_control2.php";
+
     private StringRequest request;
 
-    private Boolean firstTime =null;
-
+    private Boolean firstTime = null;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login2);
 
         Email = (EditText) findViewById(R.id.email);
         Password = (EditText) findViewById(R.id.password);
@@ -45,7 +54,6 @@ public class LoginActivity extends AppCompatActivity {
         register = (Button) findViewById(R.id.button6);
 
         requestQueue = Volley.newRequestQueue(this);
-
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +74,6 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("userID", temp);
                                 editor.apply();
 
-                                Toast.makeText(getApplicationContext(),"SUCCESSFULLY LOGGED IN. UserID:"+temp,Toast.LENGTH_LONG).show();
-
                                 startActivity(new Intent(getApplicationContext(),Welcome.class));
 
                             } if(jsonObject.names().get(0).equals("created")) {
@@ -85,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 }){
                     @Override
@@ -97,7 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                         return hashMap;
                     }
                 };
-
                 requestQueue.add(request);
             }
         });
@@ -121,16 +125,12 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("userID", temp);
                                 editor.apply();
 
-                                Toast.makeText(getApplicationContext(),"SUCCESSFULLY LOGGED IN. UserID:"+temp,Toast.LENGTH_LONG).show();
-
                                 if (isFirstTime()){ //If it is the user's first time, send them to the quiz and constraints page
-                                    startActivity(new Intent(getApplicationContext(), ChooseCuisine.class));
+                                    startActivity(new Intent(getApplicationContext(), CuisineQuiz.class));
                                 }
                                 else { //If it is an existing user, go to the homepage
                                     startActivity(new Intent(getApplicationContext(), fj.foodjunkies.Welcome.class));
                                 }
-
-                                startActivity(new Intent(getApplicationContext(),Welcome.class));
 
                             } if(jsonObject.names().get(0).equals("created")) {
                                 Toast.makeText(getApplicationContext(),"SUCCESS "+jsonObject.getString("created"),Toast.LENGTH_LONG).show();
@@ -147,7 +147,6 @@ public class LoginActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
                     }
                 }){
                     @Override
@@ -159,7 +158,6 @@ public class LoginActivity extends AppCompatActivity {
                         return hashMap;
                     }
                 };
-
                 requestQueue.add(request);
             }
         });

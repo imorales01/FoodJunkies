@@ -1,3 +1,12 @@
+/**
+ * @DataBaseHelper.java
+ *
+ * Database Helper class that is used to create the SQLite database for storing the user's
+ * Constraints. Provides functionality to add user entries, update preferences, and query
+ * user data.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.ContentValues;
@@ -7,11 +16,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static java.lang.String.*;
-
-/**
- * Created by Kah on 3/14/2018.
- * SQLite Data Base Helper class creates a database, creates a table, and provides methods to change the table
- */
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     //Database

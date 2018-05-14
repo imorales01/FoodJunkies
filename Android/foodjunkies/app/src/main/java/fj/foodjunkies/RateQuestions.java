@@ -1,3 +1,13 @@
+/**
+ * @RateQuestions.java
+ *
+ * This page is opened upon selecting a dish to rate from the RatePage activity. This page will
+ * display two questions: "Did you like the restaurant?", and "Did you like the dish?".
+ * Upon pressing the like/dislike button, the data is saved into the MySQL server.
+ * This information will be used by the algorithm to adjust the user preference.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.Context;
@@ -27,7 +37,7 @@ import java.util.Map;
 
 public class RateQuestions extends AppCompatActivity {
 
-    //URLS
+    //Php urls to access the Amazon MySQL database
     String unsave_Rest = "http://54.208.66.68:80/deleteRest.php";
     String dislike_Rest = "http://54.208.66.68:80/dislikeRest.php";
     String like_Rest = "http://54.208.66.68:80/likeRest.php";
@@ -64,7 +74,7 @@ public class RateQuestions extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         setTitle("Rate");
 
-        requestQueue = Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(this); //Initialize volley
 
         restaurantText = (TextView) findViewById(R.id.textRestaurant);
         dishText = (TextView) findViewById(R.id.textCuisine);
@@ -151,8 +161,6 @@ public class RateQuestions extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -169,7 +177,6 @@ public class RateQuestions extends AppCompatActivity {
                 return hashMap;
             }
         };
-
         requestQueue.add(request);
     }
     public void dislikeCuisineDish(){
@@ -190,8 +197,6 @@ public class RateQuestions extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -208,7 +213,6 @@ public class RateQuestions extends AppCompatActivity {
                 return hashMap;
             }
         };
-
         requestQueue.add(request);
     }
 
@@ -228,17 +232,13 @@ public class RateQuestions extends AppCompatActivity {
                     if (jsonObject.names().get(0).equals("fail")) {
                         System.out.println("Fail " + jsonObject.getString("fail"));
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         }) {
             @Override
@@ -250,11 +250,8 @@ public class RateQuestions extends AppCompatActivity {
                 return hashMap;
             }
         };
-
         requestQueue.add(request);
     }
-
-
 
     public void likeCuisineDish(){
 
@@ -270,17 +267,13 @@ public class RateQuestions extends AppCompatActivity {
                     if (jsonObject.names().get(0).equals("fail")) {
                         System.out.println("Fail " + jsonObject.getString("fail"));
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         }) {
             @Override
@@ -292,7 +285,6 @@ public class RateQuestions extends AppCompatActivity {
                 return hashMap;
             }
         };
-
         requestQueue.add(request);
     }
 
@@ -314,13 +306,10 @@ public class RateQuestions extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         }) {
             @Override
@@ -333,7 +322,6 @@ public class RateQuestions extends AppCompatActivity {
                 return hashMap;
             }
         };
-
         requestQueue.add(request);
     }
 
@@ -357,7 +345,6 @@ public class RateQuestions extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -375,11 +362,8 @@ public class RateQuestions extends AppCompatActivity {
                 return hashMap;
             }
         };
-
         requestQueue.add(request);
     }
-
-
 
     public void dislikeRest(){
 
@@ -400,13 +384,10 @@ public class RateQuestions extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         }) {
             @Override
@@ -419,7 +400,6 @@ public class RateQuestions extends AppCompatActivity {
                 return hashMap;
             }
         };
-
         requestQueue.add(request);
     }
 

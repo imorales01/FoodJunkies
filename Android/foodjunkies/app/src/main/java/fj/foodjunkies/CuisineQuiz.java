@@ -1,3 +1,13 @@
+/**
+ * @CuisineQuiz.java
+ *
+ * The initial Quiz page that opens up after first sign in is in a Tinder swipe style activity to
+ * rate cuisines. If users swipe left they dislike, and right for like. The results of this
+ * quiz will allow us to set an initial preference for the user. After the user finishes swiping,
+ * the results are recorded and saved to an Amazon web server where our MySQL database is located.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.Context;
@@ -57,7 +67,7 @@ public class CuisineQuiz extends AppCompatActivity {
         setContentView(R.layout.activity_cuisine_quiz);
         ActionBar actionBar = getSupportActionBar(); //Set back button on the title bar
         actionBar.setDisplayHomeAsUpEnabled(true);
-        setTitle("Food Quiz");
+        setTitle("Cuisine Quiz");
 
         like = (ImageView) findViewById(R.id.heart);
         dislike = (ImageView) findViewById(R.id.ximage);
@@ -202,16 +212,6 @@ public class CuisineQuiz extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-/*
-                    if (jsonObject.names().get(0).equals("success")) {
-                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
-                    }
-                    if (jsonObject.names().get(0).equals("fail")) {
-                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
-                    }
-*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -242,16 +242,6 @@ public class CuisineQuiz extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-/*
-                    if (jsonObject.names().get(0).equals("success")) {
-                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
-                    }
-                    if (jsonObject.names().get(0).equals("fail")) {
-                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
-                    }
-*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -284,16 +274,6 @@ public class CuisineQuiz extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-/*
-                    if (jsonObject.names().get(0).equals("success")) {
-                        Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_LONG).show();
-                    }
-                    if (jsonObject.names().get(0).equals("fail")) {
-                        Toast.makeText(getApplicationContext(), "Fail " + jsonObject.getString("fail"), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_LONG).show();
-                    }
-*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -1,3 +1,13 @@
+/**
+ * @Constraints.java
+ *
+ * The Constraints page is opened upon first use of the app, and can also be accessed from the
+ * Welcome screen. Here the user can set three preferences: Budget, Distance, Time which will be
+ * used as constraints and preferences when searching for restaurants. The information is saved
+ * locally into an SQLite database.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.Context;
@@ -26,7 +36,6 @@ public class Constraints extends AppCompatActivity {
     private int budget;
     private int distance;
     private int time;
-
     private int ID;
 
     @Override
@@ -72,9 +81,9 @@ public class Constraints extends AppCompatActivity {
         //If the user already exists in the database get values and update the seek bars
         if (db.userExists(ID)) {
             //Get the constraint values from the database for the user
-            int budget = db.getBudget(ID);
-            int distance = db.getDistance(ID);
-            int time = db.getTime(ID);
+            budget = db.getBudget(ID);
+            distance = db.getDistance(ID);
+            time = db.getTime(ID);
 
             //Set values of the seek bars to the user's from the SQLite database
             budget_bar.setProgress(budget);

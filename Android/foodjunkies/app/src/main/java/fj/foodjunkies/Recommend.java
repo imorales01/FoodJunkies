@@ -1,3 +1,14 @@
+/**
+ * @Recommend.java
+ *
+ * This activity generates a dish recommendation based on the algorithm and user preference.
+ * The initial values for the user is determined during the CuisineQuiz to gauge the user's preference.
+ * Afterwards as the user continues to use the app the score of cuisines rises or drops depending based
+ * on the user rating the experience. There is a button to dislike a recommended dish, request a new
+ * recommendation, or to view restaurants serving the dish.
+ *
+ */
+
 package fj.foodjunkies;
 
 import android.content.Context;
@@ -40,7 +51,6 @@ public class Recommend extends AppCompatActivity {
     String getDishName = "http://54.208.66.68:80/getDishName.php";
     String dislike_Dish = "http://54.208.66.68:80/dislikeDish.php";
     String dislike_CuisineDish = "http://54.208.66.68:80/dislikeCuisineDish.php";
-    String get_DishCuisine = "http://54.208.66.68:80/getDishCuisine.php";
 
     Button dislike;
     Button seeRestaurants;
@@ -308,8 +318,6 @@ public class Recommend extends AppCompatActivity {
                         dishURL = dishURLhere;
 
                         recName = recommend;
-
-
                     }
 
                     System.out.println("Check recName: " +recName);
@@ -325,15 +333,6 @@ public class Recommend extends AppCompatActivity {
                     editor.putString("cusID", cusID );
                     editor.putString("dishID", recommendationID);
                     editor.apply();
-
-
-                    /*  //For testing purposes
-                    String cusiID, dishiID;
-                    sharedPref = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-                    dishiID = sharedPref.getString("dishID", "");
-                    cusiID = sharedPref.getString("cusID", "");
-                    System.out.println("Check shared prefs: " + dishiID + " and " + cusiID); */
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
