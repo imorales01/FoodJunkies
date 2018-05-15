@@ -1,0 +1,9 @@
+[submodule "iOS/foodjunkies/CDYelpFusionKit"]
+	path = iOS/foodjunkies/CDYelpFusionKit
+	url = https://github.com/chrisdhaan/CDYelpFusionKit.git
+[submodule "iOS/foodjunkies/alamofire"]
+	path = iOS/foodjunkies/alamofire
+	url = https://github.com/alamofire/alamofire.git
+[submodule "iOS/foodjunkies/AlamofireObjectMapper"]
+	path = iOS/foodjunkies/AlamofireObjectMapper
+	url = https://github.com/tristanhimmelman/AlamofireObjectMapper.git

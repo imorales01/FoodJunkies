@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0637024F20A25E02000777D0 /* Yelptest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0637024E20A25E02000777D0 /* Yelptest.swift */; };
+		064FE7ED20A388FB002F7AAA /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064FE7E020A388E8002F7AAA /* SwiftyJSON.framework */; };
+		064FE7EE20A388FB002F7AAA /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 064FE7E020A388E8002F7AAA /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0673ADAA209A761C00FEA63B /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0673ADA9209A761C00FEA63B /* Login.swift */; };
+		0681735420A26576002CA412 /* OutputYelpTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0681735320A26576002CA412 /* OutputYelpTester.swift */; };
+		06D56B0320A38CB4000AB02A /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D56AFB20A38CB4000AB02A /* SwiftyJSON.swift */; };
+		06D56B0520A38DE2000AB02A /* yelprouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D56B0420A38DE2000AB02A /* yelprouter.swift */; };
+		06D56B0720A39186000AB02A /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06D56B0620A39186000AB02A /* Business.swift */; };
+		2E6868A05E8E43FBC7693674 /* Pods_ConstraintsRecommendationsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D981AE715905EF34EE804F97 /* Pods_ConstraintsRecommendationsTests.framework */; };
 		8A1A1BCE207C290800BEC9F5 /* recommend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A1BCD207C290800BEC9F5 /* recommend.swift */; };
 		8A1EF8A3207B05A50066D27B /* preferenceQuiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EF8A2207B05A50066D27B /* preferenceQuiz.swift */; };
 		8A1EF8A5207B07380066D27B /* homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1EF8A4207B07380066D27B /* homepage.swift */; };
@@ -19,9 +27,66 @@
 		8A8AE0EC207A895500A49774 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A8AE0EA207A895500A49774 /* LaunchScreen.storyboard */; };
 		8A8AE0F7207A895500A49774 /* ConstraintsRecommendationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8AE0F6207A895500A49774 /* ConstraintsRecommendationsTests.swift */; };
 		8A9CE3BF207D6FB0003C147D /* Allergy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9CE3BE207D6FB0003C147D /* Allergy.swift */; };
+		B86B21985AA9A7700432A72E /* Pods_ConstraintsRecommendations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3C0DD20DE969A446579CAD /* Pods_ConstraintsRecommendations.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		064FE7DF20A388E8002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E4FEFDB19575BE100351305;
+			remoteInfo = "SwiftyJSON iOS";
+		};
+		064FE7E120A388E8002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E4FEFE619575BE100351305;
+			remoteInfo = "SwiftyJSON iOS Tests";
+		};
+		064FE7E320A388E8002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7DFC5B1A9102BD005AA3F7;
+			remoteInfo = "SwiftyJSON macOS";
+		};
+		064FE7E520A388E8002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C7DFC651A9102BD005AA3F7;
+			remoteInfo = "SwiftyJSON macOS Tests";
+		};
+		064FE7E720A388E8002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4D7CCE81B9465A700EE7221;
+			remoteInfo = "SwiftyJSON watchOS";
+		};
+		064FE7E920A388E8002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7236B4F61BAC14150020529B;
+			remoteInfo = "SwiftyJSON tvOS";
+		};
+		064FE7EB20A388E8002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A8580F741BCF5C5B00DA927B;
+			remoteInfo = "SwiftyJSON tvOS Tests";
+		};
+		064FE7EF20A388FB002F7AAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E4FEFDA19575BE100351305;
+			remoteInfo = "SwiftyJSON iOS";
+		};
 		8A8AE0F3207A895500A49774 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A8AE0D6207A895500A49774 /* Project object */;
@@ -31,8 +96,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		06DFC52720A245B800F91E1B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				064FE7EE20A388FB002F7AAA /* SwiftyJSON.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0637024E20A25E02000777D0 /* Yelptest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yelptest.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyJSON.xcodeproj; path = "SwiftyJSON-master/SwiftyJSON.xcodeproj"; sourceTree = "<group>"; };
 		0673ADA9209A761C00FEA63B /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		0681735320A26576002CA412 /* OutputYelpTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputYelpTester.swift; sourceTree = "<group>"; };
+		06D56AFB20A38CB4000AB02A /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		06D56B0420A38DE2000AB02A /* yelprouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yelprouter.swift; sourceTree = "<group>"; };
+		06D56B0620A39186000AB02A /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
+		2E3C0DD20DE969A446579CAD /* Pods_ConstraintsRecommendations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConstraintsRecommendations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EC5E8DEBF2ED40FA3C3846D /* Pods-ConstraintsRecommendations.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConstraintsRecommendations.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConstraintsRecommendations/Pods-ConstraintsRecommendations.release.xcconfig"; sourceTree = "<group>"; };
+		40F94C23136FD840541E9DCE /* Pods-ConstraintsRecommendationsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConstraintsRecommendationsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ConstraintsRecommendationsTests/Pods-ConstraintsRecommendationsTests.release.xcconfig"; sourceTree = "<group>"; };
+		5B724689DAD193721197EDF3 /* Pods-ConstraintsRecommendationsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConstraintsRecommendationsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConstraintsRecommendationsTests/Pods-ConstraintsRecommendationsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8A1A1BCD207C290800BEC9F5 /* recommend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recommend.swift; sourceTree = "<group>"; };
 		8A1EF8A2207B05A50066D27B /* preferenceQuiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = preferenceQuiz.swift; sourceTree = "<group>"; };
 		8A1EF8A4207B07380066D27B /* homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homepage.swift; sourceTree = "<group>"; };
@@ -48,6 +137,8 @@
 		8A8AE0F6207A895500A49774 /* ConstraintsRecommendationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintsRecommendationsTests.swift; sourceTree = "<group>"; };
 		8A8AE0F8207A895500A49774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A9CE3BE207D6FB0003C147D /* Allergy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Allergy.swift; sourceTree = "<group>"; };
+		D981AE715905EF34EE804F97 /* Pods_ConstraintsRecommendationsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ConstraintsRecommendationsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD2CDCEFB6323EC5CF052578 /* Pods-ConstraintsRecommendations.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ConstraintsRecommendations.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ConstraintsRecommendations/Pods-ConstraintsRecommendations.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +146,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				064FE7ED20A388FB002F7AAA /* SwiftyJSON.framework in Frameworks */,
+				B86B21985AA9A7700432A72E /* Pods_ConstraintsRecommendations.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,18 +155,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E6868A05E8E43FBC7693674 /* Pods_ConstraintsRecommendationsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		064FE7D520A388E7002F7AAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				064FE7E020A388E8002F7AAA /* SwiftyJSON.framework */,
+				064FE7E220A388E8002F7AAA /* SwiftyJSON iOS Tests.xctest */,
+				064FE7E420A388E8002F7AAA /* SwiftyJSON.framework */,
+				064FE7E620A388E8002F7AAA /* SwiftyJSON macOS Tests.xctest */,
+				064FE7E820A388E8002F7AAA /* SwiftyJSON.framework */,
+				064FE7EA20A388E8002F7AAA /* SwiftyJSON.framework */,
+				064FE7EC20A388E8002F7AAA /* SwiftyJSON tvOS Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		54857F3760DDECF5AE77CD93 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DD2CDCEFB6323EC5CF052578 /* Pods-ConstraintsRecommendations.debug.xcconfig */,
+				3EC5E8DEBF2ED40FA3C3846D /* Pods-ConstraintsRecommendations.release.xcconfig */,
+				5B724689DAD193721197EDF3 /* Pods-ConstraintsRecommendationsTests.debug.xcconfig */,
+				40F94C23136FD840541E9DCE /* Pods-ConstraintsRecommendationsTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8A8AE0D5207A895500A49774 = {
 			isa = PBXGroup;
 			children = (
 				8A8AE0E0207A895500A49774 /* ConstraintsRecommendations */,
 				8A8AE0F5207A895500A49774 /* ConstraintsRecommendationsTests */,
 				8A8AE0DF207A895500A49774 /* Products */,
+				064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */,
+				54857F3760DDECF5AE77CD93 /* Pods */,
+				FE505374001C6AEA2F69CA23 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +218,11 @@
 				8A1EF8A8207B1D2F0066D27B /* myCell.swift */,
 				0673ADA9209A761C00FEA63B /* Login.swift */,
 				8A1A1BCD207C290800BEC9F5 /* recommend.swift */,
+				0637024E20A25E02000777D0 /* Yelptest.swift */,
+				06D56B0420A38DE2000AB02A /* yelprouter.swift */,
+				0681735320A26576002CA412 /* OutputYelpTester.swift */,
+				06D56B0620A39186000AB02A /* Business.swift */,
+				06D56AFB20A38CB4000AB02A /* SwiftyJSON.swift */,
 				8A9CE3BE207D6FB0003C147D /* Allergy.swift */,
 				8A8AE0E5207A895500A49774 /* Main.storyboard */,
 				8A8AE0E8207A895500A49774 /* Assets.xcassets */,
@@ -114,6 +241,15 @@
 			path = ConstraintsRecommendationsTests;
 			sourceTree = "<group>";
 		};
+		FE505374001C6AEA2F69CA23 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2E3C0DD20DE969A446579CAD /* Pods_ConstraintsRecommendations.framework */,
+				D981AE715905EF34EE804F97 /* Pods_ConstraintsRecommendationsTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -121,13 +257,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A8AE0FB207A895500A49774 /* Build configuration list for PBXNativeTarget "ConstraintsRecommendations" */;
 			buildPhases = (
+				7BC40C2EB23E1967A8902D7D /* [CP] Check Pods Manifest.lock */,
 				8A8AE0DA207A895500A49774 /* Sources */,
 				8A8AE0DB207A895500A49774 /* Frameworks */,
 				8A8AE0DC207A895500A49774 /* Resources */,
+				06DFC52720A245B800F91E1B /* Embed Frameworks */,
+				08D219CD94FC148A9F7A226E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				064FE7F020A388FB002F7AAA /* PBXTargetDependency */,
 			);
 			name = ConstraintsRecommendations;
 			productName = ConstraintsRecommendations;
@@ -138,6 +278,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A8AE0FE207A895500A49774 /* Build configuration list for PBXNativeTarget "ConstraintsRecommendationsTests" */;
 			buildPhases = (
+				8C1D5CB28582BFA440A4CAA4 /* [CP] Check Pods Manifest.lock */,
 				8A8AE0EE207A895500A49774 /* Sources */,
 				8A8AE0EF207A895500A49774 /* Frameworks */,
 				8A8AE0F0207A895500A49774 /* Resources */,
@@ -184,6 +325,12 @@
 			mainGroup = 8A8AE0D5207A895500A49774;
 			productRefGroup = 8A8AE0DF207A895500A49774 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 064FE7D520A388E7002F7AAA /* Products */;
+					ProjectRef = 064FE7D420A388E7002F7AAA /* SwiftyJSON.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8A8AE0DD207A895500A49774 /* ConstraintsRecommendations */,
@@ -191,6 +338,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		064FE7E020A388E8002F7AAA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 064FE7DF20A388E8002F7AAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		064FE7E220A388E8002F7AAA /* SwiftyJSON iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON iOS Tests.xctest";
+			remoteRef = 064FE7E120A388E8002F7AAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		064FE7E420A388E8002F7AAA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 064FE7E320A388E8002F7AAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		064FE7E620A388E8002F7AAA /* SwiftyJSON macOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON macOS Tests.xctest";
+			remoteRef = 064FE7E520A388E8002F7AAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		064FE7E820A388E8002F7AAA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 064FE7E720A388E8002F7AAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		064FE7EA20A388E8002F7AAA /* SwiftyJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyJSON.framework;
+			remoteRef = 064FE7E920A388E8002F7AAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		064FE7EC20A388E8002F7AAA /* SwiftyJSON tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SwiftyJSON tvOS Tests.xctest";
+			remoteRef = 064FE7EB20A388E8002F7AAA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8A8AE0DC207A895500A49774 /* Resources */ = {
@@ -212,18 +411,90 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		08D219CD94FC148A9F7A226E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ConstraintsRecommendations/Pods-ConstraintsRecommendations-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/CDYelpFusionKit/CDYelpFusionKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/YelpAPI/YelpAPI.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CDYelpFusionKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YelpAPI.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ConstraintsRecommendations/Pods-ConstraintsRecommendations-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7BC40C2EB23E1967A8902D7D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ConstraintsRecommendations-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C1D5CB28582BFA440A4CAA4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ConstraintsRecommendationsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8A8AE0DA207A895500A49774 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06D56B0720A39186000AB02A /* Business.swift in Sources */,
 				8A9CE3BF207D6FB0003C147D /* Allergy.swift in Sources */,
 				8A1A1BCE207C290800BEC9F5 /* recommend.swift in Sources */,
 				8A1EF8A3207B05A50066D27B /* preferenceQuiz.swift in Sources */,
+				06D56B0320A38CB4000AB02A /* SwiftyJSON.swift in Sources */,
+				0681735420A26576002CA412 /* OutputYelpTester.swift in Sources */,
 				8A8AE0E4207A895500A49774 /* ViewController.swift in Sources */,
+				0637024F20A25E02000777D0 /* Yelptest.swift in Sources */,
 				8A1EF8A9207B1D2F0066D27B /* myCell.swift in Sources */,
 				8A8AE0E2207A895500A49774 /* AppDelegate.swift in Sources */,
 				8A1EF8A5207B07380066D27B /* homepage.swift in Sources */,
+				06D56B0520A38DE2000AB02A /* yelprouter.swift in Sources */,
 				0673ADAA209A761C00FEA63B /* Login.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +510,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		064FE7F020A388FB002F7AAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SwiftyJSON iOS";
+			targetProxy = 064FE7EF20A388FB002F7AAA /* PBXContainerItemProxy */;
+		};
 		8A8AE0F4207A895500A49774 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8A8AE0DD207A895500A49774 /* ConstraintsRecommendations */;
@@ -375,9 +651,11 @@
 		};
 		8A8AE0FC207A895500A49774 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD2CDCEFB6323EC5CF052578 /* Pods-ConstraintsRecommendations.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ConstraintsRecommendations/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cuny.edu.ConstraintsRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -388,9 +666,11 @@
 		};
 		8A8AE0FD207A895500A49774 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EC5E8DEBF2ED40FA3C3846D /* Pods-ConstraintsRecommendations.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ConstraintsRecommendations/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cuny.edu.ConstraintsRecommendations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -401,6 +681,7 @@
 		};
 		8A8AE0FF207A895500A49774 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B724689DAD193721197EDF3 /* Pods-ConstraintsRecommendationsTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -417,6 +698,7 @@
 		};
 		8A8AE100207A895500A49774 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40F94C23136FD840541E9DCE /* Pods-ConstraintsRecommendationsTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
